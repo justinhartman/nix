@@ -1,3 +1,8 @@
+---
+title: Complete List Of Html Meta Tags
+date: 2017-06-09 00:00:00 Z
+---
+
 Copied from http://code.lancepollard.com/complete-list-of-html-meta-tags/
 
 ## Basic HTML Meta Tags
