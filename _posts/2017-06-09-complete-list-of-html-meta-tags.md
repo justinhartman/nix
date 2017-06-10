@@ -3,7 +3,29 @@ title: Complete List Of Html Meta Tags
 date: 2017-06-09 00:00:00 Z
 ---
 
-Copied from http://code.lancepollard.com/complete-list-of-html-meta-tags/
+# Complete list of HTML meta tags
+
+Ever wondered how many HTML meta tags there are? Ever wanted a complete list of all of them? Well, here you go. The most concise list of meta tags are at your disposal below. Enjoy.
+
+Know of any tags that have been ommitted below? Please [send me an email][email] so that I can add them.
+
+<!-- MarkdownTOC -->
+
+- [Basic HTML Meta Tags](#basic-html-meta-tags)
+- [OpenGraph Meta Tags](#opengraph-meta-tags)
+- [Create Custom Meta Tags](#create-custom-meta-tags)
+- [Company/Service Meta Tags](#companyservice-meta-tags)
+	- [ClaimID](#claimid)
+	- [Apple Meta Tags](#apple-meta-tags)
+	- [Internet Explorer Meta Tags](#internet-explorer-meta-tags)
+	- [Google Meta Tags](#google-meta-tags)
+	- [TweetMeme Meta Tags](#tweetmeme-meta-tags)
+	- [Blog Catalog Meta Tags](#blog-catalog-meta-tags)
+	- [Rails Meta Tags](#rails-meta-tags)
+- [HTML Link Tags](#html-link-tags)
+- [Other Resources](#other-resources)
+
+<!-- /MarkdownTOC -->
 
 ## Basic HTML Meta Tags
 
@@ -229,7 +251,6 @@ Use custom meta tags to store data that you need in Javascript, instead of hard-
 <link rel='profile' title='Microformats' href='http://microformats.org/profile/specs/'>
 <link rel='profile' href='http://gmpg.org/xfn/11'>
 <link rel='chrome-webstore-item' href='https://chrome.google.com/webstore/detail/noojglkidnpfjbincgijbaiedldjfbhh'>
-
 ```
 ## Other Resources
 
@@ -239,3 +260,5 @@ Use custom meta tags to store data that you need in Javascript, instead of hard-
 - [OpenGraph Meta Tags](http://opengraphprotocol.org/)
 - [Link Tag Meaning](http://intertwingly.net/wiki/pie/LinkTagMeaning)
 - [Google Chrome HTML5 Tags](http://www.html5rocks.com/)
+
+[email]: justin@hartman.me
