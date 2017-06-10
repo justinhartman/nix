@@ -1,6 +1,6 @@
 ---
 title: History of the Howto Guides
-date: 2017-06-10 07:21:00 +02:00
+date: 2017-06-10 06:38:00 +02:00
 ---
 
 # History of the Howto Guides
@@ -84,7 +84,7 @@ As I play, so will you.
 
 
  [wiki]: https://www.mediawiki.org/wiki/MediaWiki
- [wiki-design]: {{ site.url }}/images/pages/history/linux.justinhartman.com.design.png "Original Debain Wiki Design"
- [debian-logo]: {{ site.url }}/images/pages/history/debian.png "Debian Logo"
- [russian-assholes]: {{ site.url }}/images/pages/history/linux.justinhartman.com.png "The Russian Assholes"
+ [wiki-design]: {{ site.baseurl }}/images/pages/history/linux.justinhartman.com.design.png "Original Debain Wiki Design"
+ [debian-logo]: {{ site.baseurl }}/images/pages/history/debian.png "Debian Logo"
+ [russian-assholes]: {{ site.baseurl }}/images/pages/history/linux.justinhartman.com.png "The Russian Assholes"
  [icann]: https://www.icann.org
