@@ -1,6 +1,6 @@
 ---
 title: History of the Howto Guides
-date: 2017-06-10 05:21:00 Z
+date: 2017-06-10 07:21:00 +02:00
 ---
 
 # History of the Howto Guides

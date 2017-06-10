@@ -1,6 +1,6 @@
 ---
 title: Complete List Of Html Meta Tags
-date: 2017-06-09 00:00:00 Z
+date: 2017-06-09 02:00:00 +02:00
 ---
 
 # Complete list of HTML meta tags
