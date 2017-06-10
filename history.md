@@ -38,13 +38,15 @@ This wasn't the very first design I had for the wiki and I tried to change the d
 
 ## Why Debian?
 
-![Debian Logo][debian-logo]Unbeknownst to me I picked what I've come to believe is arguably the Godfather of all Linux distributions. This is not just my opinion either. Debian has led many innovations since it was first released in September 1993 and is one of the most popular for PCs and servers. It has been used as a base for many other distributions.
+Unbeknownst to me I picked what I've come to believe is arguably the Godfather of all Linux distributions. This is not just my opinion either. Debian has led many innovations since it was first released in September 1993 and is one of the most popular for PCs and servers. It has been used as a base for many other distributions.
 
 I certainly did not choose Debian based on what I understand now, I chose it because of one key bit of superier functionality; the APT software package manager. I tried many Linux derivatives but due to my Linux virginity I always ended up breaking my operating system because I didn't know what I was doing half the time. 
 
 Debian, to this day, remains the only Linux operating system I trust to install any software packages on, and perform major release upgrades without fear of rendering the operating system useless. Even Ubuntu, which is very closely linked to Debian has ended up broken when upgrading to new releases. There is a reason Debian is reliable and that's due to their extremely rigid policies which is why a lot of people don't like about it.
 
 Oh, there was also another reason why I chose Debian, because I really digged their logo!
+
+![Debian Logo][debian-logo]
 
 ## How it evolved
 
@@ -82,7 +84,7 @@ As I play, so will you.
 
 
  [wiki]: https://www.mediawiki.org/wiki/MediaWiki
- [wiki-design]: /images/pages/history/linux.justinhartman.com.design.png "Original Debain Wiki Design"
- [debian-logo]: /images/pages/history/debian.png "Debian Logo"
- [russian-assholes]: /images/pages/history/linux.justinhartman.com.png "The Russian Assholes"
- [icann] https://www.icann.org
+ [wiki-design]: {{ site.url }}/images/pages/history/linux.justinhartman.com.design.png "Original Debain Wiki Design"
+ [debian-logo]: {{ site.url }}/images/pages/history/debian.png "Debian Logo"
+ [russian-assholes]: {{ site.url }}/images/pages/history/linux.justinhartman.com.png "The Russian Assholes"
+ [icann]: https://www.icann.org
