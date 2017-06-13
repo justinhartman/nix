@@ -38,7 +38,7 @@ Know of any tags that have been omitted below? Please [send me an email][email] 
 <meta charset='UTF-8'>
 <meta name='keywords' content='your, tags'>
 <meta name='description' content='150 words'>
-<meta name='subject' content='your website's subject'>
+<meta name='subject' content='your websites subject'>
 <meta name='copyright' content='company name'>
 <meta name='language' content='ES'>
 <meta name='robots' content='index,follow'>
@@ -54,7 +54,7 @@ Know of any tags that have been omitted below? Please [send me an email][email] 
 <meta name='url' content='http://www.websiteaddrress.com'>
 <meta name='identifier-URL' content='http://www.websiteaddress.com'>
 <meta name='directory' content='submission'>
-<meta name='pagename' content='jQuery Tools, Tutorials and Resources - O'Reilly Media'>
+<meta name='pagename' content='jQuery Tools, Tutorials and Resources - OReilly Media'>
 <meta name='category' content=''>
 <meta name='coverage' content='Worldwide'>
 <meta name='distribution' content='Global'>
@@ -128,7 +128,7 @@ Know of any tags that have been omitted below? Please [send me an email][email] 
 
 ## Create Custom Meta Tags
 
-Use custom meta tags to store data that you need in JavaScript instead of hard-coding data into your JS source code.Here's some examples:
+Use custom meta tags to store data that you need in JavaScript instead of hard-coding data into your JS source code. Here's some examples:
 
 ```html
 <meta name='google-analytics' content='1-AHFKALJ'>
@@ -158,7 +158,7 @@ Use custom meta tags to store data that you need in JavaScript instead of hard-c
 <meta name='apple-touch-fullscreen' content='yes'>
 <meta name='apple-mobile-web-app-status-bar-style' content='black'>
 <meta name='format-detection' content='telephone=no'>
-<meta name='viewport' content='width=device-width; content='width = 320; initial-scale=1.0; maximum-scale=1.0; user-scalable=yes; target-densitydpi=160dpi'>
+<meta name='viewport' content='width=device-width; content=width = 320; initial-scale=1.0; maximum-scale=1.0; user-scalable=yes; target-densitydpi=160dpi'>
 
 <link href='/apple-touch-icon.png' rel='apple-touch-icon' type='image/png'>
 <link href='touch-icon-ipad.png' rel='apple-touch-icon' sizes='72x72'>

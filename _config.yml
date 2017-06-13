@@ -22,14 +22,14 @@ footer-links:
   instagram: 
   linkedin: justinhartman
   pinterest: 
-  rss: 
+  rss: atom.xml
   twitter: justinhartman
   stackoverflow: justinhartman
   youtube: 
   googleplus: 
 disqus: iamjustinhartman
-google_analytics: 
-url: https://justinhartman.github.io
+google_analytics: UA-100937492-1
+url: http://justinhartman.github.io
 baseurl: "/nix"
 permalink: "/:title/"
 kramdown:
@@ -39,6 +39,7 @@ kramdown:
     css_class: highlight
 gems:
 - jekyll-sitemap
+- jekyll-feed
 exclude:
 - Gemfile
 - Gemfile.lock
