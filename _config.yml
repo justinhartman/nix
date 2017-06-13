@@ -28,6 +28,7 @@ footer-links:
   googleplus: 
 disqus: iamjustinhartman
 google_analytics: UA-100937492-1
+cname_domain: http://nix.hartman.me
 url: http://justinhartman.github.io
 baseurl: "/nix"
 permalink: "/:title/"
