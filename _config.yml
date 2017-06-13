@@ -9,9 +9,9 @@ collections:
     title: Uploads
     output: true
 name: Debian, Ubuntu and macOS Guides
-description: Formally the "Debian Wiki" this is a refreshed collection of *nix based
-  howto's that I've created over the years for Linux and macOS specifically Debian,
-  Ubuntu and Mac OS X.
+description: Formally the **Debian Wiki** this is a refreshed collection of \***nix**
+  based howto's that I've created over the years for Linux and macOS specifically
+  Debian, Ubuntu and Mac OS X.
 avatar: https://avatars2.githubusercontent.com/u/717118?v=3&s=460
 footer-links:
   dribbble: 
@@ -24,7 +24,7 @@ footer-links:
   pinterest: 
   rss: 
   twitter: justinhartman
-  stackoverflow: 
+  stackoverflow: justinhartman
   youtube: 
   googleplus: 
 disqus: iamjustinhartman
