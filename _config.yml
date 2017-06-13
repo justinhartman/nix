@@ -13,7 +13,7 @@ description: Formally the **Debian Wiki** this is a refreshed collection of \***
   based howto's that I've created over the years for Linux and macOS specifically
   Debian, Ubuntu and Mac OS X.
 sass:
-  style: :expanded
+  style: :expanded # You might prefer to minify using :compressed
 avatar: https://avatars2.githubusercontent.com/u/717118?v=3&s=460
 footer-links:
   dribbble: 
@@ -31,6 +31,7 @@ footer-links:
   googleplus: 
 disqus: iamjustinhartman
 google_analytics: UA-100937492-1
+# cname_domain: http://nix.hartman.me
 url: http://nix.hartman.me
 baseurl: ""
 permalink: "/:title/"
