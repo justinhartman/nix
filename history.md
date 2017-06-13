@@ -1,8 +1,8 @@
 ---
-layout: page
 title: History of the Howto Guides
-permalink: /howto-history/
 date: 2017-06-10 06:38:00 +02:00
+permalink: "/howto-history/"
+layout: page
 ---
 
 # History of the Howto Guides
