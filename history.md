@@ -48,7 +48,7 @@ Debian, to this day, remains the only Linux operating system I trust to install 
 
 Oh, there was also another reason why I chose Debian, because I really digged their logo!
 
-![Debian Logo][debian-logo]
+![Debian Logo][debian-logo]{:class="img-responsive"}
 
 ## How it evolved
 
@@ -66,7 +66,7 @@ As I learned more about Debian and my tinkering progressed so did the howto list
 
 On 27 March 2014, seven years and two months after I launched the Debian Wiki, the Russians hack my server and this is what was left.
 
-![The Russian Assholes][russian-assholes]
+![The Russian Assholes][russian-assholes]{:class="img-responsive"}
 
 Not long thereafter I realise I had lost complete ownership of my domain `justinhartman.com` as well as the content. Godaddy, the registrar whom I registered my domain with back in 2005 were politely telling me that I no longer owned the domain. After many back and forths Godaddy informed me I never responded to their automated email to renew my domain. I vehemently disagreed with them and proved I had never received said emails. 
 
@@ -82,7 +82,7 @@ At the same time I am also going to be adding a whole series of new howto tutori
 
 As I play, so will you.
 
--- Justin Hartman
+-- [Justin Hartman][justin-home]
 
 
  [wiki]: https://www.mediawiki.org/wiki/MediaWiki
@@ -90,3 +90,4 @@ As I play, so will you.
  [debian-logo]: /images/pages/history/debian.png "Debian Logo"
  [russian-assholes]: /images/pages/history/linux.justinhartman.com.png "The Russian Assholes"
  [icann]: https://www.icann.org
+ [justin-home]: http://justin.hartman.me
