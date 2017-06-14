@@ -36,7 +36,7 @@ I learnt mostly through trial and error and I documented every step I took along
 
 This wasn't the very first design I had for the wiki and I tried to change the design quite regularly. This version was certainly the design I liked most.
 
-![The Original Debian Wiki][wiki-design]
+![The Original Debian Wiki][wiki-design]{:class="img-responsive"}
 
 ## Why Debian?
 
@@ -86,7 +86,7 @@ As I play, so will you.
 
 
  [wiki]: https://www.mediawiki.org/wiki/MediaWiki
- [wiki-design]: /images/pages/history/linux.justinhartman.com.design.png "Original Debain Wiki Design" {:class="img-responsive"}
- [debian-logo]: /images/pages/history/debian.png "Debian Logo" {:class="img-responsive"}
- [russian-assholes]: /images/pages/history/linux.justinhartman.com.png "The Russian Assholes" {:class="img-responsive"}
+ [wiki-design]: /images/pages/history/linux.justinhartman.com.design.png "Original Debain Wiki Design"
+ [debian-logo]: /images/pages/history/debian.png "Debian Logo"
+ [russian-assholes]: /images/pages/history/linux.justinhartman.com.png "The Russian Assholes"
  [icann]: https://www.icann.org
