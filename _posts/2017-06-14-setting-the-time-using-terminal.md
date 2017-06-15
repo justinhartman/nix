@@ -1,13 +1,13 @@
 ---
 title: Setting the time using Terminal
 date: 2017-06-14 20:25:00 +02:00
-permalink: "/debian/server/setting-the-time-using-terminal/"
-categories:
-- debian
-- server
 layout: post
+published: true
+categories:
+    debian
+    server
+permalink: "/debian/server/setting-the-time-using-terminal/"
 ---
-
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)

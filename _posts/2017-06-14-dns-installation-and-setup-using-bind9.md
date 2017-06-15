@@ -1,13 +1,13 @@
 ---
 title: DNS Installation and Setup using BIND9
 date: 2017-06-14 18:45:00 +02:00
-permalink: "/debian/mail-server/dns-installationand-setup-using-bind9/"
-categories:
-- mail-server
-- debian
 layout: post
+published: true
+categories:
+    mail-server
+    debian
+permalink: "/debian/mail-server/dns-installationand-setup-using-bind9/"
 ---
-
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)
