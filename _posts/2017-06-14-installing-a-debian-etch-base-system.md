@@ -9,6 +9,8 @@ layout: post
 todo: link postfix and courier installations
 ---
 
+The following is a mini HOWTO on setting up a base Debian Etch system.
+
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)
@@ -37,7 +39,7 @@ That said, I've marked where the images used to be with `Image:Filename.gif` and
 ---
 
 ## Introduction
-The following is a mini HOWTO on setting up a base Debian Etch system. I used this installation procedure when setting up my Etch server and this installation serves as the foundation for all other Debian Etch Server HOWTOs contained in this wiki. There are other HOWTOs in the wiki that detail setting up various other components for the server however this one only covers the Debian base installation.
+I used this installation procedure when setting up my Etch server and this installation serves as the foundation for all other Debian Etch Server HOWTOs contained in this wiki. There are other HOWTOs in the wiki that detail setting up various other components for the server however this one only covers the Debian base installation.
 
 ## Requirements
 As a starting point you'll need to download and get the latest Debian Etch version from the Debian website. Bandwidth in South Africa is very expensive so I decided to download the [Network Install version][network-install] as the total download size is only around 150MB. 

@@ -8,10 +8,11 @@ categories:
 layout: post
 ---
 
+This is really basic stuff but if you aren't running a GUI then it isn't as easy as opening up a Time & Date Settings control panel so this is the way to do it.
+
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)
-- [Introduction](#introduction)
 - [Setting the timezone](#setting-the-timezone)
 - [Synchronise your clock with a NTP server](#synchronise-your-clock-with-a-ntp-server)
 
@@ -25,9 +26,6 @@ This page first appeared on the [original Debian Wiki][history] which was create
  - Last Updated: 14 June 2017
 
 ---
-
-## Introduction
-This is really basic stuff but if you aren't running a GUI then it isn't as easy as opening up a Time & Date Settings control panel so this is the way to do it.
 
 ## Setting the timezone
 You first want to check what the current date and time is on your machine. Do this by running the following in a Linux shell:

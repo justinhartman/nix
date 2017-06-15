@@ -8,10 +8,11 @@ categories:
 layout: post
 ---
 
+The following HOWTO is aimed at installing and setting up a FTP server, based on Pure-FTPd, which supports multiple Virtual Hosts.
+
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)
-- [Introduction](#introduction)
 - [Requirements](#requirements)
 - [Pre-Installation](#pre-installation)
 - [Install Pure-FTPd](#install-pure-ftpd)
@@ -33,8 +34,6 @@ This page first appeared on the [original Debian Wiki][history] which was create
  - Last Updated: 14 June 2017
 
 ---
-## Introduction
-The following HOWTO is aimed at installing and setting up a FTP server, based on Pure-FTPd, which supports multiple Virtual Hosts.
 
 ## Requirements
 

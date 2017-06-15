@@ -8,10 +8,11 @@ categories:
 layout: post
 ---
 
+Installing a second hard drive is easy if you know how. I needed to do this on my server and below is the steps I followed.
+
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)
-- [Introduction](#introduction)
 - [Assumptions](#assumptions)
 - [Installation](#installation)
 - [Partitioning your new drive](#partitioning-your-new-drive)
@@ -29,9 +30,6 @@ This page first appeared on the [original Debian Wiki][history] which was create
  - Last Updated: 14 June 2017
 
 ---
-
-## Introduction
-Installing a second hard drive is easy if you know how. I needed to do this on my server and below is the steps I followed.
 
 ## Assumptions
 - I assume that you have installed the hard drive in your PC, and
