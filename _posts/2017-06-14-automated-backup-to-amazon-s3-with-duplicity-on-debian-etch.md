@@ -1,13 +1,13 @@
 ---
 title: Automated backup to Amazon S3 with Duplicity on Debian Etch
 date: 2017-06-14 20:05:00 +02:00
-layout: post
-published: true
-categories:
-    debian
-    server
 permalink: "/debian/server/automated-backup-to-amazon-s3-with-duplicity-on-debian-etch/"
+categories:
+- debian
+- server
+layout: post
 ---
+
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)

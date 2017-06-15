@@ -1,12 +1,11 @@
 ---
 title: Startup Script for Subversion
 date: 2017-06-14 21:31:00 +02:00
-layout: post
-published: false
+permalink: ''
 categories:
-    debian
-    server
-permalink: ""
+- debian
+- server
+layout: post
 ---
 
 <!-- MarkdownTOC -->
