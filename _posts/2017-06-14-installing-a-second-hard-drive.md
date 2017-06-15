@@ -1,12 +1,11 @@
 ---
 title: Installing a second hard drive
 date: 2017-06-14 20:53:00 +02:00
-layout: post
-published: true
-categories:
-    debian
-    server
 permalink: "/debian/server/installing-a-second-hard-drive/"
+categories:
+- debian
+- server
+layout: post
 ---
 
 <!-- MarkdownTOC -->
