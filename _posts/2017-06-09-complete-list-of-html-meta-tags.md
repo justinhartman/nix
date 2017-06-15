@@ -2,8 +2,11 @@
 title: Complete List Of Html Meta Tags
 date: 2017-06-09 02:00:00 +02:00
 layout: post
+published: true
+categories:
+	html
+permalink: "/html/complete-list-of-html-meta-tags/"
 ---
-
 Ever wondered how many HTML meta tags there are? Ever wanted a complete list of all of them? Well, here you go. The most concise list of meta tags are at your disposal below. Enjoy.
 
 Know of any tags that have been omitted below? Please [send me an email][email] so that I can add them.

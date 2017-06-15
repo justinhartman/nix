@@ -7,7 +7,7 @@ layout: page
 
 # History of the Howto Guides
 
-On the 27th of January 2007 I launched a [MediaWiki][wiki] website called the **Debian Wiki** which used to be hosted at `linux.justinhartman.com`. I began this website solely for selfish reasons as I wanted to document how I got various software packages up and running so I could come back to them at a later stage for easy deployment.
+On the 15th of January 2007 I launched a [MediaWiki][wiki] website called the **Debian Wiki** which used to be hosted at `linux.justinhartman.com`. I began this website solely for selfish reasons as I wanted to document how I got various software packages up and running so I could come back to them at a later stage for easy deployment.
 
 I had no choice really but to do this because everything I found online had become outdated and I had to solve my challenges by myself. What I didn't realise was how popular this wiki would become and people were using these howto's on a daily basis.
 
