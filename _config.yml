@@ -9,7 +9,7 @@ collections:
     title: Uploads
     output: true
 name: Debian, Ubuntu and macOS Guides
-description: Formally the **Debian Wiki** this is a refreshed collection of \***nix**
+description: Formally the Debian Wiki this is a refreshed collection of *nix
   based howto's that I've created over the years for Linux and macOS specifically
   Debian, Ubuntu and Mac OS X.
 sass:

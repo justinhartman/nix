@@ -1,5 +1,5 @@
 ---
-title: DNS Installation and Setup using BIND9
+title: Automated backup to Amazon S3 with Duplicity on Debian Etch
 date: 2017-06-14 20:05:00 +02:00
 layout: post
 published: true
