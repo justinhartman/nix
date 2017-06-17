@@ -8,6 +8,7 @@ categories:
 layout: post
 ---
 
+## Table of Contents
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)

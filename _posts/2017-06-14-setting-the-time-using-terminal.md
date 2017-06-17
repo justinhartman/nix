@@ -10,6 +10,7 @@ layout: post
 
 This is really basic stuff but if you aren't running a GUI then it isn't as easy as opening up a Time & Date Settings control panel so this is the way to do it.
 
+## Table of Contents
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)

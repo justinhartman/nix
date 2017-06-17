@@ -10,6 +10,7 @@ layout: post
 
 Installing a second hard drive is easy if you know how. I needed to do this on my server and below is the steps I followed.
 
+## Table of Contents
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)

@@ -10,6 +10,7 @@ layout: post
 
 The following HOWTO is aimed at installing and setting up a FTP server, based on Pure-FTPd, which supports multiple Virtual Hosts.
 
+## Table of Contents
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)

@@ -11,6 +11,7 @@ todo: link postfix and courier installations
 
 The following is a mini HOWTO on setting up a base Debian Etch system.
 
+## Table of Contents
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)

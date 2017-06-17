@@ -10,6 +10,7 @@ layout: post
 
 This HOWTO will assist you in getting a Domain Name Server (DNS) up and running using BIND9 on Debian Etch.
 
+## Table of Contents
 <!-- MarkdownTOC -->
 
 - [Page Migration](#page-migration)

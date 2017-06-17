@@ -12,6 +12,7 @@ Ever wondered how many HTML meta tags there are? Ever wanted a complete list of 
 
 Know of any tags that have been omitted below? Please [send me an email][email] so that I can add them.
 
+## Table of Contents
 <!-- MarkdownTOC -->
 
 - [Basic HTML Meta Tags](#basic-html-meta-tags)
