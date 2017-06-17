@@ -3,8 +3,8 @@ title: Installing CakePHP on Mac OS X running XAMPP
 date: 2017-06-16 01:21:00 +02:00
 permalink: "/php/cakephp/installing-cakephp-on-mac-os-x-running-xampp/"
 categories:
-    php
-    cakephp
+- php
+- cakephp
 layout: post
 published: true
 ---

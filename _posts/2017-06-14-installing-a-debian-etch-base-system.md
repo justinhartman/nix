@@ -3,7 +3,7 @@ title: Installing a Debian Etch base system
 date: 2017-06-14 18:16:00 +02:00
 permalink: "/debian/installing-a-debian-etch-base-system/"
 categories:
-    debian
+- debian
 layout: post
 published: false
 todo: link postfix and courier installations

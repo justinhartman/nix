@@ -3,7 +3,7 @@ title: Complete List Of Html Meta Tags
 date: 2017-06-09 02:00:00 +02:00
 permalink: "/html/complete-list-of-html-meta-tags/"
 categories:
-	html
+- html
 layout: post
 published: true
 ---

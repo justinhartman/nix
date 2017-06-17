@@ -1,5 +1,5 @@
 ---
-title: nix.hartman.me
+title: howto.hartman.me
 timezone: Africa/Johannesburg
 collections:
   posts:
@@ -20,7 +20,7 @@ footer-links:
   email: justin@hartman.me
   facebook: 
   flickr: 
-  github: justinhartman/nix
+  github: justinhartman/howto
   instagram: 
   linkedin: justinhartman
   pinterest: 
