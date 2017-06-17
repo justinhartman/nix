@@ -10,7 +10,7 @@
 
 
 /* SITE */
-	Last update: 2017/06/13
+	Last update: {% last_modified_at %}
 	Language: English
 	Doctype: HTML5
 	IDE: Sublime Text 3, Sourcetree, Github Pages, Jekyll

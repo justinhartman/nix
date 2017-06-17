@@ -42,10 +42,12 @@ kramdown:
 gems:
 - jekyll-sitemap
 - jekyll-feed
+- jekyll-last-modified-at
 exclude:
 - Gemfile
 - Gemfile.lock
 - README.md
+- LICENSE.md
 - CNAME
 - nix.sublime-project
 - nix.sublime-workspace
