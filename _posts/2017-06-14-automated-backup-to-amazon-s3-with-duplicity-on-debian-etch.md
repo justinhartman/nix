@@ -1,12 +1,12 @@
 ---
 title: Automated backup to Amazon S3 with Duplicity on Debian Etch
 date: 2017-06-14 20:05:00 +02:00
-layout: post
-published: true
+permalink: "/debian/server/automated-backup-to-amazon-s3-with-duplicity-on-debian-etch/"
 categories:
     debian
     server
-permalink: "/debian/server/automated-backup-to-amazon-s3-with-duplicity-on-debian-etch/"
+layout: post
+published: true
 ---
 
 If you've tried to use Debian Etch's version of Duplicity you'll know there is no way to use Amazon S3 servers for remote backup as Duplicity on Etch is simply not current enough. This tutorial will show you how to install the most current Duplicity and set it up to backup your Debian Etch server.

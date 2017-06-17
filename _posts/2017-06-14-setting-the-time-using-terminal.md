@@ -3,9 +3,10 @@ title: Setting the time using Terminal
 date: 2017-06-14 20:25:00 +02:00
 permalink: "/debian/server/setting-the-time-using-terminal/"
 categories:
-- debian
-- server
+    debian
+    server
 layout: post
+published: true
 ---
 
 This is really basic stuff but if you aren't running a GUI then it isn't as easy as opening up a Time & Date Settings control panel so this is the way to do it.
