@@ -13,7 +13,7 @@
 
 
 /* SITE */
-    Last update: {% last_modified_at %}
+    Last update: {{ site.time }}
     Language: English
     Doctype: HTML5
     IDE: Sublime Text 3, Sourcetree, Github Pages, Jekyll
