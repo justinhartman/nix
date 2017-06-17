@@ -1,4 +1,5 @@
 ---
+permalink: '/humans.txt'
 ---
 
 /* TEAM */
@@ -14,6 +15,7 @@
 
 /* SITE */
     Last update: {{ site.time }}
+    Revision: {{ site.github.build_revision }}
     Language: English
     Doctype: HTML5
     IDE: Sublime Text 3, Sourcetree, Github Pages, Jekyll
