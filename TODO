@@ -1,0 +1,53 @@
+README:
+  ☐ Need to add content for the following @created(17-06-23 13:27):
+    ☐ Project
+    ☐ Description
+    ☐ Usage
+    ☐ Contributing
+    ☐ Credits
+    ☐ License
+  ☐ Add the shield badges relevant to the build
+
+Project Files:
+
+  LICENSE.md @created(17-06-23 13:38):
+    ☐ Need content still
+  CREDITS.md @created(17-06-23 13:38):
+    ☐ File creation
+    ☐ Add content
+  CONTRIBUTING.md @created(17-06-23 13:38):
+    ☐ Research the file for this so it can form the basis for people who want to contribute on the site.
+    ☐ Create the file
+    ☐ Add content
+
+Theme @created(17-06-23 13:42):
+  ☐ Find the Jekyll theme that looked like `readthedocs.org`
+  ☐ Evaluate how difficult it would be to migrate that theme into the boilerplate theme I have now
+
+Posts to be Migrated:
+
+  Lamp & FTP: @created(17-06-23 13:28)
+    ☐ Setting up a LAMP Server
+    ☐ PureFTPd Installation and Setup
+
+  Mail Server Server: @created(17-06-23 13:33)
+   ☐ Postfix and Courier Installation using MySQL
+   ☐ ASSP Anti-Spam Proxy Setup using Postfix
+
+  Server Security Tutorials: @created(17-06-23 13:33)
+   ☐ Intrusion Detection using BASE and Snort
+   ☐ Server Monitoring with Munin and Monit
+   ☐ Secure SSH server with Public/Private key authentication
+
+  Debian Software Configuration Tutorials: @created(17-06-23 13:33)
+   ☐ Startup Script for Subversion
+   ☐ Moving a Subversion repository to another server
+   ☐ FFmpeg, FFmpeg-PHP, Lame, Libogg, Libvorbis, FLVtool2, Mplayer, Mencoder, AMR Installation
+   ☐ Wordpress Installation on Debian
+
+  Gnome Desktop Tutorials: @created(17-06-23 13:33)
+   ☐ Installing a PDF Printer in Gnome
+   ☐ Swapping Control and Command keys for PowerPC
+
+
+
