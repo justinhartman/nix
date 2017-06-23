@@ -5,6 +5,8 @@ permalink: '/humans.txt'
 
 /* TEAM */
     Chef: Justin Hartman
+    Email: justin [@] hartman.me
+    Web: http://justin.hartman.me
     Twitter: @justinhartman
     From: Cape Town, South Africa
 
