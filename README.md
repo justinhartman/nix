@@ -1,3 +1,15 @@
+# Project
+
+# Description
+
+# Usage
+
+# Contributing
+
+# Credits
+
+# License
+
 # This is the data for my blog
 
 It is automatically transformed by [Jekyll](http://github.com/mojombo/jekyll)

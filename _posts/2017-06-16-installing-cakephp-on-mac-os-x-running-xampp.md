@@ -44,22 +44,27 @@ Open up a terminal window and run the following shell commands. This will downlo
 
 ### Download and Build
 ```bash
-/Applications/XAMPP/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-/Applications/XAMPP/bin/php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-/Applications/XAMPP/bin/php composer-setup.php
-/Applications/XAMPP/bin/php -r "unlink('composer-setup.php');"
+$ /Applications/XAMPP/bin/php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+$ /Applications/XAMPP/bin/php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+$ /Applications/XAMPP/bin/php composer-setup.php
+$ /Applications/XAMPP/bin/php -r "unlink('composer-setup.php');"
 ```
 
 ### Moving things around
 Once you see the `Installer Verified` message output in your terminal window you can then run the following command.
 ```bash
-mv composer.phar /Applications/XAMPP/bin/composer
+$ mv composer.phar /Applications/XAMPP/bin/composer
+$ alias composer='/Applications/XAMPP/bin/composer/composer.phar'
 ```
-This command moves the `composer.phar` file to the XAMPP `bin` directory so that you can access it from a centralised location within XAMPP. It is useful to move it as you may want or need to install other packages via Composer.
+This command moves the `composer.phar` file to the XAMPP `bin` directory so that you can access it from a centralised location within XAMPP. The `alias` command makes composer available globally. It is useful to move it as you may want or need to install other packages via Composer.
 
 You will now be able to run composer at the following location:
 ```bash
-/Applications/XAMPP/bin/composer/composer.phar
+$ /Applications/XAMPP/bin/composer/composer.phar
+```
+or simply run:
+```bash
+$ composer
 ```
 
 ## Setting up a CakePHP project
@@ -70,13 +75,13 @@ XAMPP serves website files from the `htdocs` folder so you will need to ensure t
 
 In the terminal window run the following command to navigate to the `htdocs` folder.
 ```bash
-cd /Applications/XAMPP/xamppfiles/htdocs
+$ cd /Applications/XAMPP/xamppfiles/htdocs
 ```
 
 ### Install CakePHP
 Finally we are now ready to install CakePHP. You can do this by running the following command in your terminal window.
 ```bash
-/Applications/XAMPP/bin/php /Applications/XAMPP/bin/composer/composer.phar create-project --prefer-dist helloworld/app helloworld
+$ /Applications/XAMPP/bin/php composer create-project --prefer-dist helloworld/app helloworld
 ```
 **Very Important:** In the above command you need to replace *helloworld* with the name of the project you are setting up.
 
