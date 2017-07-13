@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+		<title>Create a humans.txt file with a Last Updated timestamp in Jekyll – Debian, Ubuntu and macOS Guides – Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</title>
+			<meta charset="utf-8" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+	
+	<meta name="description" content="I wanted to create a humans.txt file but at the same time I did not want to manually update the Last update variable in /* SITE */ section every time I made a change. I wanted to automate the process so that I never have to worry about it again.
+
+" />
+	<meta property="og:description" content="I wanted to create a humans.txt file but at the same time I did not want to manually update the Last update variable in /* SITE */ section every time I made a change. I wanted to automate the process so that I never have to worry about it again.
+
+" />
+	
+	<link rel='author' href='humans.txt' type='text/plain'>
+	
+	<meta property="og:title" content="Create a humans.txt file with a Last Updated timestamp in Jekyll" />
+	<meta property="twitter:title" content="Create a humans.txt file with a Last Updated timestamp in Jekyll" />
+	
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" type="text/css" href="http://localhost:4000/style.css" />
+		<link rel="alternate" type="application/rss+xml" title="Debian, Ubuntu and macOS Guides - Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X." href="http://localhost:4000/feed.xml" /> 
+    <!-- Last modified at: 2017-07-09 01:02:04 +0000 | Revision d4c4ca395c6dc6a56c6da7ba2f55a19fd90c8d3e -->
+</head>
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="http://localhost:4000/" class="site-avatar"><img src="https://avatars2.githubusercontent.com/u/717118?v=3&s=460" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="http://localhost:4000/">Debian, Ubuntu and macOS Guides</a></h1>
+            <p class="site-description">Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</p>
+          </div>
+
+          <nav>
+            <a href="http://localhost:4000/">Home</a>
+            <a href="http://localhost:4000/howto-history/">History</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>Create a humans.txt file with a Last Updated timestamp in Jekyll</h1>
+
+  <div class="date">
+    Published on June 23, 2017 | Updated on July  9, 2017
+  </div>
+
+  <div class="entry">
+    <p>I wanted to create a <a href="http://humanstxt.org">humans.txt</a> file but at the same time I did not want to manually update the <code class="highlighter-rouge">Last update</code> variable in <code class="highlighter-rouge">/* SITE */</code> section every time I made a change. I wanted to automate the process so that I never have to worry about it again.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<!-- MarkdownTOC -->
+
+<ul>
+  <li><a href="#create-a-new-jekyll-template">Create a new Jekyll template</a></li>
+  <li><a href="#create-humans-markdown-file">Create Humans Markdown file</a></li>
+  <li><a href="#linking-your-template-and-define-a-permalink">Linking your template and define a permalink</a></li>
+  <li><a href="#adding-the-meta-tag-to-your-template">Adding the meta-tag to your template</a></li>
+  <li><a href="#give-it-a-whirl">Give it a whirl</a></li>
+  <li><a href="#support">Support</a></li>
+</ul>
+
+<!-- /MarkdownTOC -->
+
+<p><a href="/humans.txt">Click here</a> to see my <code class="highlighter-rouge">humans.txt</code> file. The below is what I did to get it to work and conform to standards.</p>
+
+<h2 id="create-a-new-jekyll-template">Create a new Jekyll template</h2>
+<p>For this to work you need to create a template so that when the file is accessed it won’t display any of your site template but rather output raw text.</p>
+
+<ul>
+  <li>Create a new file in <code class="highlighter-rouge">/_layouts/</code></li>
+  <li>
+    <p>Inside this file, paste the following code:
+```html</p>
+
+    <p>Installing CakePHP on Mac OS X running XAMPP</p>
+
+    <table>
+      <tbody>
+        <tr>
+          <td>Published on June 15, 2017</td>
+          <td>Updated on July  9, 2017</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>The following Howto will install CakePHP and get you up and running using XAMPP on Mac OS X 10.7.5+.</p>
+  </li>
+</ul>
+
+<p>This guide is a series of terminal commands that will:</p>
+
+<p>Install the latest version of Composer.
+  Move the composer phar file to the XAMPP bin directory.
+  Install the latest version of CakePHP.</p>
+
+<p>Table of Contents</p>
+
+<p>Minimum Requirements
+  Getting Composer</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  Download and Build
+  Moving things around
+</code></pre>
+</div>
+
+<p>Setting up a CakePHP project</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>  Working Directory
+  Install CakePHP
+</code></pre>
+</div>
+
+<p>Minimum Requirements
+I have successfully tested the installation using the following package versions:</p>
+
+<p>Mac OS X 10.7.5
+  XAMPP 5.6.30-0
+  Composer 1.4.1</p>
+
+<p>Earlier versions of the above software may indeed work however I have not tested them so YMMV.</p>
+
+<p>Getting Composer
+Open up a terminal window and run the following shell commands. This will download the composer setup file, verify the installer is valid and create the packaged composer.phar file.</p>
+
+<p>Download and Build
+$ /Applications/XAMPP/bin/php -r “copy(‘https://getcomposer.org/installer’, ‘composer-setup.php’);”
+$ /Applications/XAMPP/bin/php -r “if (hash_file(‘SHA384’, ‘composer-setup.php’) === ‘669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410’) { echo ‘Installer verified’; } else { echo ‘Installer corrupt’; unlink(‘composer-setup.php’); } echo PHP_EOL;”
+$ /Applications/XAMPP/bin/php composer-setup.php
+$ /Applications/XAMPP/bin/php -r “unlink(‘composer-setup.php’);”</p>
+
+<p>Moving things around
+Once you see the Installer Verified message output in your terminal window you can then run the following command.
+bash
+$ mv composer.phar /Applications/XAMPP/bin/composer
+$ alias composer=’/Applications/XAMPP/bin/composer/composer.phar’</p>
+
+<p>This command moves the composer.phar file to the XAMPP bin directory so that you can access it from a centralised location within XAMPP. The alias command makes composer available globally. It is useful to move it as you may want or need to install other packages via Composer.</p>
+
+<p>You will now be able to run composer at the following location:
+bash
+$ /Applications/XAMPP/bin/composer/composer.phar</p>
+
+<p>or simply run:
+bash
+$ composer</p>
+
+<p>Setting up a CakePHP project
+By default Composer will install the most current version of CakePHP that works with the PHP version in XAMPP. I did not want to run PHP 7 so I chose to download XAMPP using PHP version 5.6.30. Running PHP 5 or 7 really won’t matter to installing CakePHP; either version will work.</p>
+
+<p>Working Directory
+XAMPP serves website files from the htdocs folder so you will need to ensure that you are in the correct path before installing CakePHP.</p>
+
+<p>In the terminal window run the following command to navigate to the htdocs folder.
+bash
+$ cd /Applications/XAMPP/xamppfiles/htdocs</p>
+
+<p>Install CakePHP
+Finally we are now ready to install CakePHP. You can do this by running the following command in your terminal window.
+bash
+$ /Applications/XAMPP/bin/php composer create-project –prefer-dist helloworld/app helloworld</p>
+
+<p>Very Important: In the above command you need to replace helloworld with the name of the project you are setting up.</p>
+
+<p>Once the command has run you will now have a new folder in the htdocs folder. You can now fire-up the site in your browser.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Please enable JavaScript to view the comments powered by Disqus.
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>* Save the file as `/_layouts/humans.html`
+
+What you have done is create a completely new template that will only output the content and ignore any template files you may have. 
+
+By default, Jekyll will wrap your text in a paragraph (`&lt;p&gt;`) tag so the `strip_html` part in the above tells Jekyll to simply dump the raw text without any HTML tags. 
+
+## Create Humans Markdown file
+Go ahead and create a file in the root of your Jekyll site and save it as `humans.md`. You have to create the Markdown file so that Jekyll can compile the page when it generates the site. If you create a `txt` file you lose the ability to access Jekyll's Liquid variables and we need this.
+
+To comply to [the humans standard][standard] you will need to have at least these two sections in your `humans.md` file:
+ 1. `/* TEAM */`
+ 2. `/* SITE */`
+
+I have more in [my file][my-humans] but add what you feel is necessary for yours. In this example let's assume your `humans.md` file now looks like this:
+</code></pre>
+</div>
+<p>/* TEAM */
+    Boss: Your name
+    Email: be weary of spam
+    Twitter: @username
+    From: The country you live in</p>
+
+<p>/* SITE <em>/
+    Last update: ???????????
+    Language: English
+    Doctype: HTML5
+    IDE: Sublime Text 3, Github Pages, Jekyll
+<code class="highlighter-rouge">
+The `Last update` field is where we use Jekyll's Liquid variable `2017-07-09 01:02:04 +0000`. Copy and paste `2017-07-09 01:02:04 +0000` next to the `Last update:` field so that your Markdown includes the tag and ends up looking like this:
+</code>
+/</em> SITE */
+    Last update: 2017-07-09 01:02:04 +0000
+    Language: English
+    Doctype: HTML5
+    IDE: Sublime Text 3, Github Pages, Jekyll
+```</p>
+
+<h2 id="linking-your-template-and-define-a-permalink">Linking your template and define a permalink</h2>
+<p>You now need to ensure that <code class="highlighter-rouge">humans.md</code> is accessing your <code class="highlighter-rouge">humans.html</code> template file you created. Go ahead and open up your <code class="highlighter-rouge">/humans.md</code> file. Add the following code snippet to the top of your file:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>---
+layout: humans
+permalink: '/humans.txt'
+---
+</code></pre>
+</div>
+<p>Your file should end up looking like this:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>---
+layout: humans
+permalink: '/humans.txt'
+---
+/* TEAM */
+    Boss: Your name
+    Email: be weary of spam
+    Twitter: @username
+    From: The country you live in
+
+/* SITE */
+    Last update: 2017-07-09 01:02:04 +0000
+    Language: English
+    Doctype: HTML5
+    IDE: Sublime Text 3, Github Pages, Jekyll
+</code></pre>
+</div>
+<p>Setting the <code class="highlighter-rouge">permalink</code> to <code class="highlighter-rouge">/humans.txt</code> is important because we want to conform to standards and we want to render a plain txt page for search engines and the like.</p>
+
+<h2 id="adding-the-meta-tag-to-your-template">Adding the meta-tag to your template</h2>
+<p>The final step is to add a valid meta-tag to your <code class="highlighter-rouge">&lt;head&gt;</code> section in your main template file. In my case my main template is <code class="highlighter-rouge">/_includes/default.html</code></p>
+
+<p>Add the following line to your template:
+```html</p>
+<link rel="author" href="humans.txt" type="text/plain" />
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+If you aren't sure where to put this meta-tag look for the structure similar to the below example which is in your template.
+```html
+&lt;head&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;meta name="description" content="" /&gt;
+    &lt;link rel="stylesheet" type="text/css" href="style.css"&gt;
+    &lt;meta content='text/html; charset=utf-8' http-equiv='Content-Type'&gt;
+&lt;/head&gt;
+</code></pre>
+</div>
+
+<h2 id="give-it-a-whirl">Give it a whirl</h2>
+<p>Once you have published your changes you should be able to access your newly created humans file at <code class="highlighter-rouge">yourdomain.com/humans.txt</code>.</p>
+
+<h2 id="support">Support</h2>
+<p>If you need any help, found a bug or to report any issues please <a href="https://github.com/justinhartman/howto/issues/new">click here</a> and log a support request.</p>
+
+
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'iamjustinhartman';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+<!-- Text Highlighting via TXTpen -->
+<script src="https://txtpen.com/embed.js?site=_nix>"></script>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:justin@hartman.me"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/justinhartman/howto"><i class="svg-icon github"></i></a>
+
+<a href="https://www.linkedin.com/in/justinhartman"><i class="svg-icon linkedin"></i></a>
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/justinhartman"><i class="svg-icon twitter"></i></a>
+<a href="http://stackoverflow.com/justinhartman"><i class="svg-icon stackoverflow"></i></a>
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-100937492-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/jekyll/create-a-humans-txt-file-with-a-last-updated-timestamp-in-jekyll/',
+		  'title': 'Create a humans.txt file with a Last Updated timestamp in Jekyll'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

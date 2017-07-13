@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+		<title>PureFTPd Installation and Setup – Debian, Ubuntu and macOS Guides – Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</title>
+			<meta charset="utf-8" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+	
+	<meta name="description" content="The following HOWTO is aimed at installing and setting up a FTP server, based on Pure-FTPd, which supports multiple Virtual Hosts.
+
+" />
+	<meta property="og:description" content="The following HOWTO is aimed at installing and setting up a FTP server, based on Pure-FTPd, which supports multiple Virtual Hosts.
+
+" />
+	
+	<link rel='author' href='humans.txt' type='text/plain'>
+	
+	<meta property="og:title" content="PureFTPd Installation and Setup" />
+	<meta property="twitter:title" content="PureFTPd Installation and Setup" />
+	
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" type="text/css" href="http://localhost:4000/style.css" />
+		<link rel="alternate" type="application/rss+xml" title="Debian, Ubuntu and macOS Guides - Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X." href="http://localhost:4000/feed.xml" /> 
+    <!-- Last modified at: 2017-07-09 01:02:04 +0000 | Revision d4c4ca395c6dc6a56c6da7ba2f55a19fd90c8d3e -->
+</head>
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="http://localhost:4000/" class="site-avatar"><img src="https://avatars2.githubusercontent.com/u/717118?v=3&s=460" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="http://localhost:4000/">Debian, Ubuntu and macOS Guides</a></h1>
+            <p class="site-description">Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</p>
+          </div>
+
+          <nav>
+            <a href="http://localhost:4000/">Home</a>
+            <a href="http://localhost:4000/howto-history/">History</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>PureFTPd Installation and Setup</h1>
+
+  <div class="date">
+    Published on June 14, 2017 | Updated on July  9, 2017
+  </div>
+
+  <div class="entry">
+    <p>The following HOWTO is aimed at installing and setting up a FTP server, based on Pure-FTPd, which supports multiple Virtual Hosts.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<!-- MarkdownTOC -->
+
+<ul>
+  <li><a href="#page-migration">Page Migration</a></li>
+  <li><a href="#requirements">Requirements</a></li>
+  <li><a href="#pre-installation">Pre-Installation</a></li>
+  <li><a href="#install-pure-ftpd">Install Pure-FTPd</a>
+    <ul>
+      <li><a href="#create-a-new-user">Create a new user</a></li>
+      <li><a href="#user-information">User Information</a></li>
+      <li><a href="#resetting-a-password">Resetting a password</a></li>
+    </ul>
+  </li>
+  <li><a href="#starting-the-ftp-server">Starting the FTP Server</a></li>
+  <li><a href="#configuring-pure-ftpd">Configuring Pure-FTPd</a></li>
+  <li><a href="#restart-pure-ftpd">Restart Pure-FTPd:</a></li>
+  <li><a href="#references">References</a></li>
+</ul>
+
+<!-- /MarkdownTOC -->
+
+<h2 id="page-migration">Page Migration</h2>
+<p>This page first appeared on the <a href="/howto-history/">original Debian Wiki</a> which was created over a decade ago.</p>
+
+<ul>
+  <li>Originally Published: 15 January 2007</li>
+  <li>Migrated: 14 June 2017</li>
+  <li>Last Updated: 14 June 2017</li>
+</ul>
+
+<hr />
+
+<h2 id="requirements">Requirements</h2>
+
+<ul>
+  <li>A Debian Etch base installation - <a href="/debian/installing-a-debian-etch-base-system/">Installation HOWTO here</a>.</li>
+  <li>Root access to your server.</li>
+</ul>
+
+<h2 id="pre-installation">Pre-Installation</h2>
+
+<p>Before proceeding to install, update the necessary packages in Debian with these commands.
+<code class="highlighter-rouge">bash
+apt-get update
+apt-get upgrade
+</code></p>
+
+<h2 id="install-pure-ftpd">Install Pure-FTPd</h2>
+<p>In a Linux shell run the following:
+<code class="highlighter-rouge">bash
+apt-get install pure-ftpd-common pure-ftpd
+</code>
+Now we need to create a new system group for pureftpd:
+<code class="highlighter-rouge">bash
+groupadd ftpgroup
+</code>
+Now we add a user for the group and give that user no permission to a home directory or a shell:
+<code class="highlighter-rouge">bash
+useradd -g ftpgroup -d /dev/null -s /etc ftpuser
+</code>
+### Create a new user
+Lets create our first FTP user. In this example our user will be <code class="highlighter-rouge">justin</code>:
+<code class="highlighter-rouge">bash
+pure-pw useradd justin -u ftpuser -g ftpgroup -d /home/pubftp/justin -N 10
+</code>
+In the above command we gave him a limit of 10 MB disk space with the option <code class="highlighter-rouge">-N 10</code>. Now you have to enter justin’s new password twice.</p>
+
+<p>By default your users will be saved in <code class="highlighter-rouge">/etc/pure-ftpd/pureftpd.passwd</code>, but first we have to update the pureftpd Database:
+<code class="highlighter-rouge">bash
+pure-pw mkdb
+</code>
+The <em>Database</em> here is simply a binary file but it is ordered and has an index for quick access.</p>
+
+<h3 id="user-information">User Information</h3>
+<p>To get some user details enter the following to get a complete list of all pureftpd users:
+<code class="highlighter-rouge">bash
+pure-pw list
+</code>
+If you want to show information about a specific user:
+<code class="highlighter-rouge">bash
+pure-pw show justin
+</code>
+This will show you detailed information about the user <code class="highlighter-rouge">justin</code>.
+You will notice that the line <code class="highlighter-rouge">Directory: /home/pubftp/justin/./</code> has a trailing <code class="highlighter-rouge">./</code> but you shouldn’t worry as this is simply the chroot for the user, which means he can’t go <em>above</em> his directory.</p>
+
+<h3 id="resetting-a-password">Resetting a password</h3>
+<p>If you forget the password for a user, you can reset it as follows:
+<code class="highlighter-rouge">bash
+pure-pw passwd justin
+</code>
+After a password reset update your database:
+<code class="highlighter-rouge">bash
+pure-pw mkdb
+</code></p>
+
+<h2 id="starting-the-ftp-server">Starting the FTP Server</h2>
+<p>To test the server let’s start it:
+<code class="highlighter-rouge">bash
+/usr/sbin/pure-ftpd -S 127.0.0.1,21 -c 30 -C 1 -l puredb:/etc/pureftpd.pdb -x -E -j -R
+</code>
+The shell will open up a new <code class="highlighter-rouge">pure-ftpd</code> session and you should be able to connect to your FTP server. Use an FTP client to test whether or not you are able to login with your user details you created.
+Once you are happy close the session off:
+<code class="highlighter-rouge">bash
+ctrl   z
+</code></p>
+
+<h2 id="configuring-pure-ftpd">Configuring Pure-FTPd</h2>
+<p>Right so by now you have created a user and been able to connect to your FTP server. We now want to setup a few things so that we can run Pure-FTPd as a daemon.</p>
+
+<p>First you need to set Pure-FTPd as a standalone server:
+<code class="highlighter-rouge">bash
+vim /etc/default/pure-ftpd-common
+</code>
+Replace this:
+<code class="highlighter-rouge">bash
+STANDALONE_OR_INETD=inetd
+</code>
+With this:
+<code class="highlighter-rouge">bash
+STANDALONE_OR_INETD=standalone
+</code>
+Now we want to ensure that the standalone server checks our user-names and passwords against the <code class="highlighter-rouge">pureftpd</code> database file:
+<code class="highlighter-rouge">bash
+cd /etc/pure-ftpd/conf
+vim PureDB
+</code>
+Add the following to that file (if it doesn’t exist):
+<code class="highlighter-rouge">bash
+/etc/pure-ftpd/pureftpd.pdb
+</code>
+Now we need to create a symbolic link to the PureDB file:
+<code class="highlighter-rouge">bash
+cd /etc/pure-ftpd/auth
+ln -s /etc/pure-ftpd/conf/PureDB 50pure
+ls -ls
+</code>
+You should now see a new file <code class="highlighter-rouge">50pure</code> linking to <code class="highlighter-rouge">../conf/PureDB</code>.</p>
+
+<h2 id="restart-pure-ftpd">Restart Pure-FTPd:</h2>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>/etc/init.d/pure-ftpd restart
+</code></pre>
+</div>
+<p>Pure-FTPd should now startup in daemon mode and everything should be up and running.</p>
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li><a href="http://www.debian-administration.org/articles/383">Howto install pureftpd on a debian machine</a> - by remofritzsche</li>
+  <li><a href="http://www.pureftpd.org/">Pure-FTPd Website</a></li>
+</ul>
+
+
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'iamjustinhartman';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+<!-- Text Highlighting via TXTpen -->
+<script src="https://txtpen.com/embed.js?site=_nix>"></script>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:justin@hartman.me"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/justinhartman/howto"><i class="svg-icon github"></i></a>
+
+<a href="https://www.linkedin.com/in/justinhartman"><i class="svg-icon linkedin"></i></a>
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/justinhartman"><i class="svg-icon twitter"></i></a>
+<a href="http://stackoverflow.com/justinhartman"><i class="svg-icon stackoverflow"></i></a>
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-100937492-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/debian/lamp/pureftpd-installation-and-setup/',
+		  'title': 'PureFTPd Installation and Setup'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

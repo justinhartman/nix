@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+		<title>Installing CakePHP on Mac OS X running XAMPP – Debian, Ubuntu and macOS Guides – Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</title>
+			<meta charset="utf-8" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+	
+	<meta name="description" content="The following Howto will install CakePHP and get you up and running using XAMPP on Mac OS X 10.7.5+.
+
+" />
+	<meta property="og:description" content="The following Howto will install CakePHP and get you up and running using XAMPP on Mac OS X 10.7.5+.
+
+" />
+	
+	<link rel='author' href='humans.txt' type='text/plain'>
+	
+	<meta property="og:title" content="Installing CakePHP on Mac OS X running XAMPP" />
+	<meta property="twitter:title" content="Installing CakePHP on Mac OS X running XAMPP" />
+	
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" type="text/css" href="http://localhost:4000/style.css" />
+		<link rel="alternate" type="application/rss+xml" title="Debian, Ubuntu and macOS Guides - Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X." href="http://localhost:4000/feed.xml" /> 
+    <!-- Last modified at: 2017-07-09 01:02:04 +0000 | Revision d4c4ca395c6dc6a56c6da7ba2f55a19fd90c8d3e -->
+</head>
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="http://localhost:4000/" class="site-avatar"><img src="https://avatars2.githubusercontent.com/u/717118?v=3&s=460" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="http://localhost:4000/">Debian, Ubuntu and macOS Guides</a></h1>
+            <p class="site-description">Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</p>
+          </div>
+
+          <nav>
+            <a href="http://localhost:4000/">Home</a>
+            <a href="http://localhost:4000/howto-history/">History</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>Installing CakePHP on Mac OS X running XAMPP</h1>
+
+  <div class="date">
+    Published on June 15, 2017 | Updated on July  9, 2017
+  </div>
+
+  <div class="entry">
+    <p>The following Howto will install <a href="http://cakephp.com">CakePHP</a> and get you up and running using <a href="http:///xampp.com">XAMPP</a> on Mac OS X 10.7.5+.</p>
+
+<p>This guide is a series of terminal commands that will:</p>
+
+<ol>
+  <li>Install the latest version of Composer.</li>
+  <li>Move the <code class="highlighter-rouge">composer phar</code> file to the XAMPP <code class="highlighter-rouge">bin</code> directory.</li>
+  <li>Install the latest version of CakePHP.</li>
+</ol>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<!-- MarkdownTOC -->
+
+<ul>
+  <li><a href="#minimum-requirements">Minimum Requirements</a></li>
+  <li><a href="#getting-composer">Getting Composer</a>
+    <ul>
+      <li><a href="#download-and-build">Download and Build</a></li>
+      <li><a href="#moving-things-around">Moving things around</a></li>
+    </ul>
+  </li>
+  <li><a href="#setting-up-a-cakephp-project">Setting up a CakePHP project</a>
+    <ul>
+      <li><a href="#working-directory">Working Directory</a></li>
+      <li><a href="#install-cakephp">Install CakePHP</a></li>
+    </ul>
+  </li>
+</ul>
+
+<!-- /MarkdownTOC -->
+
+<h2 id="minimum-requirements">Minimum Requirements</h2>
+<p>I have successfully tested the installation using the following package versions:</p>
+
+<ul>
+  <li>Mac OS X 10.7.5</li>
+  <li>XAMPP 5.6.30-0</li>
+  <li>Composer 1.4.1</li>
+</ul>
+
+<p>Earlier versions of the above software may indeed work however I have not tested them so YMMV.</p>
+
+<h2 id="getting-composer">Getting Composer</h2>
+<p>Open up a terminal window and run the following shell commands. This will download the composer setup file, verify the installer is valid and create the packaged <code class="highlighter-rouge">composer.phar</code> file.</p>
+
+<h3 id="download-and-build">Download and Build</h3>
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>/Applications/XAMPP/bin/php -r <span class="s2">"copy('https://getcomposer.org/installer', 'composer-setup.php');"</span>
+<span class="gp">$ </span>/Applications/XAMPP/bin/php -r <span class="s2">"if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"</span>
+<span class="gp">$ </span>/Applications/XAMPP/bin/php composer-setup.php
+<span class="gp">$ </span>/Applications/XAMPP/bin/php -r <span class="s2">"unlink('composer-setup.php');"</span>
+</code></pre>
+</div>
+
+<h3 id="moving-things-around">Moving things around</h3>
+<p>Once you see the <code class="highlighter-rouge">Installer Verified</code> message output in your terminal window you can then run the following command.
+<code class="highlighter-rouge">bash
+$ mv composer.phar /Applications/XAMPP/bin/composer
+$ alias composer='/Applications/XAMPP/bin/composer/composer.phar'
+</code>
+This command moves the <code class="highlighter-rouge">composer.phar</code> file to the XAMPP <code class="highlighter-rouge">bin</code> directory so that you can access it from a centralised location within XAMPP. The <code class="highlighter-rouge">alias</code> command makes composer available globally. It is useful to move it as you may want or need to install other packages via Composer.</p>
+
+<p>You will now be able to run composer at the following location:
+<code class="highlighter-rouge">bash
+$ /Applications/XAMPP/bin/composer/composer.phar
+</code>
+or simply run:
+<code class="highlighter-rouge">bash
+$ composer
+</code></p>
+
+<h2 id="setting-up-a-cakephp-project">Setting up a CakePHP project</h2>
+<p>By default Composer will install the most current version of CakePHP that works with the PHP version in XAMPP. I did not want to run PHP 7 so I chose to download XAMPP using PHP version 5.6.30. Running PHP 5 or 7 really won’t matter to installing CakePHP; either version will work.</p>
+
+<h3 id="working-directory">Working Directory</h3>
+<p>XAMPP serves website files from the <code class="highlighter-rouge">htdocs</code> folder so you will need to ensure that you are in the correct path before installing CakePHP.</p>
+
+<p>In the terminal window run the following command to navigate to the <code class="highlighter-rouge">htdocs</code> folder.
+<code class="highlighter-rouge">bash
+$ cd /Applications/XAMPP/xamppfiles/htdocs
+</code></p>
+
+<h3 id="install-cakephp">Install CakePHP</h3>
+<p>Finally we are now ready to install CakePHP. You can do this by running the following command in your terminal window.
+<code class="highlighter-rouge">bash
+$ /Applications/XAMPP/bin/php composer create-project --prefer-dist helloworld/app helloworld
+</code>
+<strong>Very Important:</strong> In the above command you need to replace <em>helloworld</em> with the name of the project you are setting up.</p>
+
+<p>Once the command has run you will now have a new folder in the <code class="highlighter-rouge">htdocs</code> folder. You can now fire-up the site in your browser.</p>
+
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'iamjustinhartman';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+<!-- Text Highlighting via TXTpen -->
+<script src="https://txtpen.com/embed.js?site=_nix>"></script>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:justin@hartman.me"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/justinhartman/howto"><i class="svg-icon github"></i></a>
+
+<a href="https://www.linkedin.com/in/justinhartman"><i class="svg-icon linkedin"></i></a>
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/justinhartman"><i class="svg-icon twitter"></i></a>
+<a href="http://stackoverflow.com/justinhartman"><i class="svg-icon stackoverflow"></i></a>
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-100937492-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/php/cakephp/installing-cakephp-on-mac-os-x-running-xampp/',
+		  'title': 'Installing CakePHP on Mac OS X running XAMPP'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

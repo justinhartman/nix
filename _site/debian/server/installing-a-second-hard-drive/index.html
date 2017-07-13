@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+		<title>Installing a second hard drive – Debian, Ubuntu and macOS Guides – Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</title>
+			<meta charset="utf-8" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+	
+	<meta name="description" content="Installing a second hard drive is easy if you know how. I needed to do this on my server and below is the steps I followed.
+
+" />
+	<meta property="og:description" content="Installing a second hard drive is easy if you know how. I needed to do this on my server and below is the steps I followed.
+
+" />
+	
+	<link rel='author' href='humans.txt' type='text/plain'>
+	
+	<meta property="og:title" content="Installing a second hard drive" />
+	<meta property="twitter:title" content="Installing a second hard drive" />
+	
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" type="text/css" href="http://localhost:4000/style.css" />
+		<link rel="alternate" type="application/rss+xml" title="Debian, Ubuntu and macOS Guides - Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X." href="http://localhost:4000/feed.xml" /> 
+    <!-- Last modified at: 2017-07-09 01:02:04 +0000 | Revision d4c4ca395c6dc6a56c6da7ba2f55a19fd90c8d3e -->
+</head>
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="http://localhost:4000/" class="site-avatar"><img src="https://avatars2.githubusercontent.com/u/717118?v=3&s=460" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="http://localhost:4000/">Debian, Ubuntu and macOS Guides</a></h1>
+            <p class="site-description">Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</p>
+          </div>
+
+          <nav>
+            <a href="http://localhost:4000/">Home</a>
+            <a href="http://localhost:4000/howto-history/">History</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>Installing a second hard drive</h1>
+
+  <div class="date">
+    Published on June 14, 2017 | Updated on July  9, 2017
+  </div>
+
+  <div class="entry">
+    <p>Installing a second hard drive is easy if you know how. I needed to do this on my server and below is the steps I followed.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<!-- MarkdownTOC -->
+
+<ul>
+  <li><a href="#page-migration">Page Migration</a></li>
+  <li><a href="#assumptions">Assumptions</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#partitioning-your-new-drive">Partitioning your new drive</a></li>
+  <li><a href="#format-the-new-disk">Format the new disk</a></li>
+  <li><a href="#mount-your-new-drive">Mount your new drive</a></li>
+  <li><a href="#adding-to-fstab">Adding to fstab</a></li>
+</ul>
+
+<!-- /MarkdownTOC -->
+
+<h2 id="page-migration">Page Migration</h2>
+<p>This page first appeared on the <a href="/howto-history/">original Debian Wiki</a> which was created over a decade ago.</p>
+
+<ul>
+  <li>Originally Published: 29 January 2007</li>
+  <li>Migrated: 14 June 2017</li>
+  <li>Last Updated: 14 June 2017</li>
+</ul>
+
+<hr />
+
+<h2 id="assumptions">Assumptions</h2>
+<ul>
+  <li>I assume that you have installed the hard drive in your PC, and</li>
+  <li>That you have rebooted your machine</li>
+  <li>In this example our primary hard drive is located at <code class="highlighter-rouge">/dev/hda</code> and our second, new hard drive is located at <code class="highlighter-rouge">/dev/hdc</code> (replace according to your system)</li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+<p>The first step is to check to see that your new hard drive is installed and picked up by Debian. You do this by running the following command in a shell:
+<code class="highlighter-rouge">bash
+fdisk -l
+</code>
+This will give you an output that should look something like this:
+```bash
+Disk /dev/hda: 80.0 GB, 80026361856 bytes
+255 heads, 63 sectors/track, 9729 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes</p>
+
+<p>Device Boot      Start         End      Blocks   Id  System
+/dev/hda1   *           1        9354    75135973   83  Linux
+/dev/hda2            9355        9729     3012187    5  Extended
+/dev/hda5            9355        9729     3012156   82  Linux swap / Solaris</p>
+
+<p>Disk /dev/hdc: 500.1 GB, 500107862016 bytes
+255 heads, 63 sectors/track, 60801 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+```
+You can see that the 500GB disk at <code class="highlighter-rouge">/dev/hdc</code> is being picked up but there are no partitions yet for this drive.</p>
+
+<h2 id="partitioning-your-new-drive">Partitioning your new drive</h2>
+<p>Next up we need to partition our drive with the following:
+<code class="highlighter-rouge">bash
+cfdisk /dev/hdc
+</code>
+The cfdisk controller will load up and here you can create a new partition on your drive. From the menus at the bottom I selected the following:
+<code class="highlighter-rouge">bash
+1. New &gt;&gt; Primary &gt;&gt; Size in MB
+2. Once done select Write
+3. Select Quit
+Your new partition has been created at /dev/hdc1
+</code></p>
+
+<h2 id="format-the-new-disk">Format the new disk</h2>
+<p>Now that we have a new partition at <code class="highlighter-rouge">/dev/hdc1</code> we need to format it for usage by the system. From a Linux shell type:
+<code class="highlighter-rouge">bash
+mkfs.ext3 /dev/hdc1
+</code>
+This will now format our partition with the ext3 filesystem which should work fine for your Debian system.</p>
+
+<h2 id="mount-your-new-drive">Mount your new drive</h2>
+<p>Now that we have partitioned the drive and formatted it we can now mount the drive to begin using it. From a shell run:
+<code class="highlighter-rouge">bash
+mkdir /new-disk
+mount -t ext3 /dev/hdc1 /new-disk
+</code>
+The above commands create a new directory for the drive to be mounted in and then we mount the drive to this directory. To check that the drive has been mounted run the following:
+<code class="highlighter-rouge">bash
+ls -lsa /new-disk
+</code>
+You should see the following:
+<code class="highlighter-rouge">bash
+root@debian:/# ls -lsa /new-disk
+total 24
+ 4 drwxrwxrwt  3 root root  4096 2007-01-29 01:57 .
+ 4 drwxr-xr-x 22 root root  4096 2007-01-29 01:58 ..
+16 drwx------  2 root root 16384 2007-01-29 01:57 lost found
+</code></p>
+
+<h2 id="adding-to-fstab">Adding to fstab</h2>
+<p>Everything is now up and running however we need to add our new drive to <code class="highlighter-rouge">/etc/fstab</code> so that it will be mounted automatically when we reboot the machine.</p>
+
+<p>First let’s edit fstab:
+<code class="highlighter-rouge">bash
+vim /etc/fstab
+</code>
+At the end of the file add the following line:
+<code class="highlighter-rouge">bash
+/dev/hdc1       /new-disk            ext3    defaults,errors=remount-ro 0       1 
+</code>
+Save the file and you’re done.</p>
+
+
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'iamjustinhartman';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+<!-- Text Highlighting via TXTpen -->
+<script src="https://txtpen.com/embed.js?site=_nix>"></script>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:justin@hartman.me"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/justinhartman/howto"><i class="svg-icon github"></i></a>
+
+<a href="https://www.linkedin.com/in/justinhartman"><i class="svg-icon linkedin"></i></a>
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/justinhartman"><i class="svg-icon twitter"></i></a>
+<a href="http://stackoverflow.com/justinhartman"><i class="svg-icon stackoverflow"></i></a>
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-100937492-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/debian/server/installing-a-second-hard-drive/',
+		  'title': 'Installing a second hard drive'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>
