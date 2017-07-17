@@ -6,7 +6,7 @@ categories:
 - ubuntu
 - apple
 layout: post
-published: false
+published: true
 ---
 If you want to swap both the Command keys with the default Control key on Ubuntu 17.04 inverting what they do currently then this is for you.
 
