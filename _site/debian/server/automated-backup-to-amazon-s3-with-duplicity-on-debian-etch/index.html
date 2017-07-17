@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+		<title>Automated backup to Amazon S3 with Duplicity on Debian Etch – Debian, Ubuntu and macOS Guides – Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</title>
+			<meta charset="utf-8" />
+	<meta content='text/html; charset=utf-8' http-equiv='Content-Type'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+	
+	<meta name="description" content="If you’ve tried to use Debian Etch’s version of Duplicity you’ll know there is no way to use Amazon S3 servers for remote backup as Duplicity on Etch is simply not current enough. This tutorial will show you how to install the most current Duplicity and set it up to backup your Debian Etch server.
+
+" />
+	<meta property="og:description" content="If you’ve tried to use Debian Etch’s version of Duplicity you’ll know there is no way to use Amazon S3 servers for remote backup as Duplicity on Etch is simply not current enough. This tutorial will show you how to install the most current Duplicity and set it up to backup your Debian Etch server.
+
+" />
+	
+	<link rel='author' href='humans.txt' type='text/plain'>
+	
+	<meta property="og:title" content="Automated backup to Amazon S3 with Duplicity on Debian Etch" />
+	<meta property="twitter:title" content="Automated backup to Amazon S3 with Duplicity on Debian Etch" />
+	
+		<!--[if lt IE 9]>
+			<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+		<link rel="stylesheet" type="text/css" href="http://localhost:4000/style.css" />
+		<link rel="alternate" type="application/rss+xml" title="Debian, Ubuntu and macOS Guides - Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X." href="http://localhost:4000/feed.xml" /> 
+    <!-- Last modified at: 2017-07-09 01:02:04 +0000 | Revision d4c4ca395c6dc6a56c6da7ba2f55a19fd90c8d3e -->
+</head>
+  <body>
+    <div class="wrapper-masthead">
+      <div class="container">
+        <header class="masthead clearfix">
+          <a href="http://localhost:4000/" class="site-avatar"><img src="https://avatars2.githubusercontent.com/u/717118?v=3&s=460" /></a>
+
+          <div class="site-info">
+            <h1 class="site-name"><a href="http://localhost:4000/">Debian, Ubuntu and macOS Guides</a></h1>
+            <p class="site-description">Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</p>
+          </div>
+
+          <nav>
+            <a href="http://localhost:4000/">Home</a>
+            <a href="http://localhost:4000/howto-history/">History</a>
+          </nav>
+        </header>
+      </div>
+    </div>
+
+    <div id="main" role="main" class="container">
+      <article class="post">
+  <h1>Automated backup to Amazon S3 with Duplicity on Debian Etch</h1>
+
+  <div class="date">
+    Published on June 14, 2017 | Updated on July  9, 2017
+  </div>
+
+  <div class="entry">
+    <p>If you’ve tried to use Debian Etch’s version of Duplicity you’ll know there is no way to use Amazon S3 servers for remote backup as Duplicity on Etch is simply not current enough. This tutorial will show you how to install the most current Duplicity and set it up to backup your Debian Etch server.</p>
+
+<h2 id="table-of-contents">Table of Contents</h2>
+<!-- MarkdownTOC -->
+
+<ul>
+  <li><a href="#page-migration">Page Migration</a></li>
+  <li><a href="#access-requirements">Access Requirements</a></li>
+  <li><a href="#software-requirements">Software Requirements</a></li>
+  <li><a href="#installation">Installation</a></li>
+  <li><a href="#generate-a-new-gnupg-key">Generate a new GnuPG key</a></li>
+  <li><a href="#create-a-shell-script">Create a Shell Script</a></li>
+  <li><a href="#testing-if-it-works">Testing if it works</a></li>
+  <li><a href="#create-a-cronjob">Create a cronjob</a></li>
+  <li><a href="#troubleshooting">Troubleshooting</a>
+    <ul>
+      <li><a href="#python-error">Python Error</a></li>
+      <li><a href="#amazon-s3-bucket-names">Amazon S3 Bucket Names</a></li>
+    </ul>
+  </li>
+</ul>
+
+<!-- /MarkdownTOC -->
+
+<h2 id="page-migration">Page Migration</h2>
+<p>This page first appeared on the <a href="/howto-history/">original Debian Wiki</a> which was created over a decade ago.</p>
+
+<ul>
+  <li>Originally Published: 5 March 2007</li>
+  <li>Migrated: 14 June 2017</li>
+  <li>Last Updated: 14 June 2017</li>
+</ul>
+
+<hr />
+
+<h2 id="access-requirements">Access Requirements</h2>
+<ul>
+  <li>Amazon S3 Access Key ID</li>
+  <li>Amazon S3 Secret Access Key</li>
+  <li>GPG Key</li>
+  <li>GPG Passphrase</li>
+</ul>
+
+<h2 id="software-requirements">Software Requirements</h2>
+<ul>
+  <li><a href="http://duplicity.nongnu.org/">Duplicity</a> v0.5.02 or later</li>
+  <li>Python v2.3 or later</li>
+  <li>librsync v0.9.6 or later</li>
+  <li>GnuPG for encryption</li>
+  <li>GnuPGInterface 0.3.2 or later</li>
+  <li>NcFTP version 3.1.9 or later</li>
+  <li><a href="http://code.google.com/p/boto/">Boto</a> 0.9d or later</li>
+  <li>pexpect 2.1 or later</li>
+  <li>Python development files</li>
+  <li>librsync development files</li>
+</ul>
+
+<h2 id="installation">Installation</h2>
+<p>Update your packages.
+<code class="highlighter-rouge">bash
+apt-get update
+apt-get upgrade
+</code>
+Install the Debian Etch packages that meet the minimum requirements.
+<code class="highlighter-rouge">bash
+apt-get install build-essential
+apt-get install librsync1 librsync-dev python-gnupginterface ncftp python-pexpect python-dev
+</code>
+Download the packages that are outdated in Debian Etch.
+<code class="highlighter-rouge">bash
+wget http://savannah.nongnu.org/download/duplicity/duplicity-0.5.02.tar.gz
+wget http://boto.googlecode.com/files/boto-1.4c.tar.gz
+</code>
+Extract the files.
+<code class="highlighter-rouge">bash
+tar -zxvf duplicity-0.5.02.tar.gz
+tar -zxvf boto-1.4c.tar.gz
+</code>
+Install Boto
+<code class="highlighter-rouge">bash
+cd boto-1.4c
+python setup.py install
+</code>
+Install Duplicity
+<code class="highlighter-rouge">bash
+cd duplicity-0.5.02
+python setup.py install
+</code>
+## Generate a new GnuPG key
+Generate a new gpg key for duplicity.
+<code class="highlighter-rouge">bash    
+gpg --gen-key
+</code>
+You will see the following output.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gpg (GnuPG) 1.4.6; Copyright (C) 2006 Free Software Foundation, Inc.
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it
+under certain conditions. See the file COPYING for details.
+
+Please select what kind of key you want:
+(1) DSA and Elgamal (default)
+(2) DSA (sign only)
+(5) RSA (sign only)
+Your selection?
+</code></pre>
+</div>
+
+<p>Select DSA and Elgamal.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>DSA keypair will have 1024 bits.
+ELG-E keys may be between 1024 and 4096 bits long.
+What keysize do you want? (2048)
+</code></pre>
+</div>
+
+<p>The default of 2048 is more than enough and you could change this if you like.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Requested keysize is 2048 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      &lt;n&gt;  = key expires in n days
+      &lt;n&gt;w = key expires in n weeks
+      &lt;n&gt;m = key expires in n months
+      &lt;n&gt;y = key expires in n years
+Key is valid for? (0)
+</code></pre>
+</div>
+
+<p>You must leave the key to not expire so the default is correct here once again.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Key does not expire at all
+Is this correct? (y/N)
+</code></pre>
+</div>
+
+<p>Yes, this is correct :)</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>You need a user ID to identify your key; the software constructs the user ID
+from the Real Name, Comment and Email Address in this form:
+
+Real name: Duplicity Backup
+Email address: duplicity@example.com
+Comment: GPG Key for Duplicity
+You selected this USER-ID:
+    "Duplicity Backup (Key for Duplicity) &lt;duplicity@example.com&gt;"
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit?
+</code></pre>
+</div>
+
+<p>You can enter anything you like in the Real Name, Email and Comment fields and once done select O for Okay and hit enter.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>You need a Passphrase to protect your secret key.
+
+Enter Passphrase:
+Repeat Passphrase:
+</code></pre>
+</div>
+
+<p>Enter a password here and make it as complex as possible. Please remember your password you type here because we will need it later.</p>
+
+<p>Your key will now begin its creation process and this can take a very long time (up to 10-15 minutes). Just be patient, it will generate a key and submit the results as shown below.</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>gpg: key FB0B7A37 marked as ultimately trusted
+public and secret key created and signed.
+
+gpg: checking the trustdb
+gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+gpg: depth: 0  valid:   2  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 2u
+pub   1024D/FB0B7A37 2008-09-22
+      Key fingerprint = B5A2 14BD 368B 0E7F 44F3  7C81 2460 B782 FC0B 6A25
+uid                  Duplicity Backup &lt;duplicity@example.com&gt;
+sub   2048g/FB0B7A37 2008-09-22
+</code></pre>
+</div>
+
+<p>The results above are displayed once your key has been generate. From this you will need to remember your 8 digit key. In this example our key is <code class="highlighter-rouge">FB0B7A37</code>. Keep this in a safe place.</p>
+
+<h2 id="create-a-shell-script">Create a Shell Script</h2>
+<p>Because we’ll be automating the backup process via cronjob we need to create a shell script that can do all the hard work for us. Below is a basic example shell script that you can modify.
+```bash
+#!/bin/bash
+# Export some ENV variables so you don’t have to type anything
+export AWS_ACCESS_KEY_ID=<your-amazon-s3-access-key-id>
+export AWS_SECRET_ACCESS_KEY=<your-amazon-s3-secret-access-key>
+export PASSPHRASE="<your-gpg-passphrase>"</your-gpg-passphrase></your-amazon-s3-secret-access-key></your-amazon-s3-access-key-id></p>
+
+<p>GPG_KEY=<your-8-digit-gpg-key></your-8-digit-gpg-key></p>
+
+<h1 id="the-source-of-your-backup">The source of your backup</h1>
+<p>SOURCE=/</p>
+
+<h1 id="select-a-unique-name-for-your-bucket-below">Select a unique name for your bucket below.</h1>
+<p># The bucket doesn’t need to exist on Amazon
+# however you should make sure it’s unique to
+# avoid any conflict with existing buckets from
+# other Amazon S3 users.
+DEST=s3+http://<your-amazon-s3-bucket-name></your-amazon-s3-bucket-name></p>
+
+<p>duplicity \
+    –encrypt-key=${GPG_KEY} \
+    –sign-key=${GPG_KEY} \
+    –include=/boot \
+    –include=/etc \
+    –include=/home \
+    –include=/root \
+    –include=/var/lib/mysql \
+    –exclude=/** \
+    ${SOURCE} ${DEST}</p>
+
+<h1 id="reset-the-env-variables-dont-need-them-sitting-around">Reset the ENV variables. Don’t need them sitting around</h1>
+<p>export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export PASSPHRASE=
+<code class="highlighter-rouge">
+Save the file and make it executable.
+</code>bash
+chmod 700 your-filename.sh
+<code class="highlighter-rouge">
+## Testing if it works
+Prior to creating a cronjob you should test that everything is working perfectly. You can run the following command to see if your script backs up to Amazon S3.
+</code>bash
+/bin/bash /path/to/script/your-filename.sh
+<code class="highlighter-rouge">
+You should see the following output if your backup was successful.
+</code>bash
+No signatures found, switching to full backup.</p>
+
+<p>————–[ Backup Statistics ]————–
+StartTime 1222126413.99 (Tue Sep 23 01:33:33 2008)
+EndTime 1222126736.68 (Tue Sep 23 01:38:56 2008)
+ElapsedTime 322.69 (5 minutes 22.69 seconds)
+SourceFiles 54198
+SourceFileSize 311617938 (297 MB)
+NewFiles 54198
+NewFileSize 311617938 (297 MB)
+DeletedFiles 0
+ChangedFiles 0
+ChangedFileSize 0 (0 bytes)
+ChangedDeltaSize 0 (0 bytes)
+DeltaEntries 54198
+RawDeltaSize 136543331 (130 MB)
+TotalDestinationSizeChange 112326763 (107 MB)
+Errors 0
+————————————————-
+<code class="highlighter-rouge">
+## Create a cronjob
+Assuming you had no errors when you ran the test you can now set up the cronjob to automate the process.
+</code>bash
+crontab -e
+0     0       *       *       *       /bin/bash /path/to/script/your-filename.sh
+```
+This will run the backup every day at midnight.</p>
+
+<h2 id="troubleshooting">Troubleshooting</h2>
+
+<h3 id="python-error">Python Error</h3>
+<p>If you get Python errors when trying to run your backup script then I recommend that you first create a unique bucket on Amazon S3 and make sure that you upload at least one file to your new bucket. I’ve noticed a strange problem with Amazon S3 that prevents the script from running if your bucket doesn’t already have a file in it.</p>
+
+<h3 id="amazon-s3-bucket-names">Amazon S3 Bucket Names</h3>
+<p>Another common issue is the naming of your bucket on Amazon S3. Remember that bucket names have to be unique on the entire Amazon S3 server so if another user is using the same bucket name as you’re trying to create then your backup will fail. Try using a name like <code class="highlighter-rouge">amazon_bucket_1234</code> when naming your bucket.</p>
+
+
+  </div>
+
+  
+<div class="comments">
+	<div id="disqus_thread"></div>
+	<script type="text/javascript">
+
+	    var disqus_shortname = 'iamjustinhartman';
+
+	    (function() {
+	        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	    })();
+
+	</script>
+	<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+
+</article>
+<!-- Text Highlighting via TXTpen -->
+<script src="https://txtpen.com/embed.js?site=_nix>"></script>
+
+    </div>
+
+    <div class="wrapper-footer">
+      <div class="container">
+        <footer class="footer">
+          
+<a href="mailto:justin@hartman.me"><i class="svg-icon email"></i></a>
+
+
+<a href="https://github.com/justinhartman/howto"><i class="svg-icon github"></i></a>
+
+<a href="https://www.linkedin.com/in/justinhartman"><i class="svg-icon linkedin"></i></a>
+
+<a href="/feed.xml"><i class="svg-icon rss"></i></a>
+<a href="https://www.twitter.com/justinhartman"><i class="svg-icon twitter"></i></a>
+<a href="http://stackoverflow.com/justinhartman"><i class="svg-icon stackoverflow"></i></a>
+
+
+        </footer>
+      </div>
+    </div>
+
+    
+	<!-- Google Analytics -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-100937492-1', 'auto');
+		ga('send', 'pageview', {
+		  'page': '/debian/server/automated-backup-to-amazon-s3-with-duplicity-on-debian-etch/',
+		  'title': 'Automated backup to Amazon S3 with Duplicity on Debian Etch'
+		});
+	</script>
+	<!-- End Google Analytics -->
+
+
+  </body>
+</html>

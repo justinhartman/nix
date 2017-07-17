@@ -1,0 +1,1482 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xml" href="http://localhost:4000/feed.xslt.xml"?><feed xmlns="http://www.w3.org/2005/Atom"><generator uri="http://jekyllrb.com" version="3.3.0">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2017-07-09T01:02:04+00:00</updated><id>http://localhost:4000/</id><title type="html">howto.hartman.me</title><subtitle>Formally the Debian Wiki this is a refreshed collection of *nix based howto's that I've created over the years for Linux and macOS specifically Debian, Ubuntu and Mac OS X.</subtitle><entry><title type="html">Create a humans.txt file with a Last Updated timestamp in Jekyll</title><link href="http://localhost:4000/jekyll/create-a-humans-txt-file-with-a-last-updated-timestamp-in-jekyll/" rel="alternate" type="text/html" title="Create a humans.txt file with a Last Updated timestamp in Jekyll" /><published>2017-06-23T09:34:00+00:00</published><updated>2017-06-23T09:34:00+00:00</updated><id>http://localhost:4000/jekyll/create-a-humans-txt-file-with-a-last-updated-timestamp-in-jekyll</id><content type="html" xml:base="http://localhost:4000/jekyll/create-a-humans-txt-file-with-a-last-updated-timestamp-in-jekyll/">&lt;p&gt;I wanted to create a &lt;a href=&quot;http://humanstxt.org&quot;&gt;humans.txt&lt;/a&gt; file but at the same time I did not want to manually update the &lt;code class=&quot;highlighter-rouge&quot;&gt;Last update&lt;/code&gt; variable in &lt;code class=&quot;highlighter-rouge&quot;&gt;/* SITE */&lt;/code&gt; section every time I made a change. I wanted to automate the process so that I never have to worry about it again.&lt;/p&gt;
+
+&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;!-- MarkdownTOC --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-a-new-jekyll-template&quot;&gt;Create a new Jekyll template&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-humans-markdown-file&quot;&gt;Create Humans Markdown file&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#linking-your-template-and-define-a-permalink&quot;&gt;Linking your template and define a permalink&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#adding-the-meta-tag-to-your-template&quot;&gt;Adding the meta-tag to your template&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#give-it-a-whirl&quot;&gt;Give it a whirl&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#support&quot;&gt;Support&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /MarkdownTOC --&gt;
+
+&lt;p&gt;&lt;a href=&quot;/humans.txt&quot;&gt;Click here&lt;/a&gt; to see my &lt;code class=&quot;highlighter-rouge&quot;&gt;humans.txt&lt;/code&gt; file. The below is what I did to get it to work and conform to standards.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-a-new-jekyll-template&quot;&gt;Create a new Jekyll template&lt;/h2&gt;
+&lt;p&gt;For this to work you need to create a template so that when the file is accessed it won’t display any of your site template but rather output raw text.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create a new file in &lt;code class=&quot;highlighter-rouge&quot;&gt;/_layouts/&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Inside this file, paste the following code:
+```html&lt;/p&gt;
+
+    &lt;p&gt;Installing CakePHP on Mac OS X running XAMPP&lt;/p&gt;
+
+    &lt;table&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;td&gt;Published on June 15, 2017&lt;/td&gt;
+          &lt;td&gt;Updated on July  9, 2017&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+
+    &lt;p&gt;The following Howto will install CakePHP and get you up and running using XAMPP on Mac OS X 10.7.5+.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This guide is a series of terminal commands that will:&lt;/p&gt;
+
+&lt;p&gt;Install the latest version of Composer.
+  Move the composer phar file to the XAMPP bin directory.
+  Install the latest version of CakePHP.&lt;/p&gt;
+
+&lt;p&gt;Table of Contents&lt;/p&gt;
+
+&lt;p&gt;Minimum Requirements
+  Getting Composer&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  Download and Build
+  Moving things around
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Setting up a CakePHP project&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  Working Directory
+  Install CakePHP
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Minimum Requirements
+I have successfully tested the installation using the following package versions:&lt;/p&gt;
+
+&lt;p&gt;Mac OS X 10.7.5
+  XAMPP 5.6.30-0
+  Composer 1.4.1&lt;/p&gt;
+
+&lt;p&gt;Earlier versions of the above software may indeed work however I have not tested them so YMMV.&lt;/p&gt;
+
+&lt;p&gt;Getting Composer
+Open up a terminal window and run the following shell commands. This will download the composer setup file, verify the installer is valid and create the packaged composer.phar file.&lt;/p&gt;
+
+&lt;p&gt;Download and Build
+$ /Applications/XAMPP/bin/php -r “copy(‘https://getcomposer.org/installer’, ‘composer-setup.php’);”
+$ /Applications/XAMPP/bin/php -r “if (hash_file(‘SHA384’, ‘composer-setup.php’) === ‘669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410’) { echo ‘Installer verified’; } else { echo ‘Installer corrupt’; unlink(‘composer-setup.php’); } echo PHP_EOL;”
+$ /Applications/XAMPP/bin/php composer-setup.php
+$ /Applications/XAMPP/bin/php -r “unlink(‘composer-setup.php’);”&lt;/p&gt;
+
+&lt;p&gt;Moving things around
+Once you see the Installer Verified message output in your terminal window you can then run the following command.
+bash
+$ mv composer.phar /Applications/XAMPP/bin/composer
+$ alias composer=’/Applications/XAMPP/bin/composer/composer.phar’&lt;/p&gt;
+
+&lt;p&gt;This command moves the composer.phar file to the XAMPP bin directory so that you can access it from a centralised location within XAMPP. The alias command makes composer available globally. It is useful to move it as you may want or need to install other packages via Composer.&lt;/p&gt;
+
+&lt;p&gt;You will now be able to run composer at the following location:
+bash
+$ /Applications/XAMPP/bin/composer/composer.phar&lt;/p&gt;
+
+&lt;p&gt;or simply run:
+bash
+$ composer&lt;/p&gt;
+
+&lt;p&gt;Setting up a CakePHP project
+By default Composer will install the most current version of CakePHP that works with the PHP version in XAMPP. I did not want to run PHP 7 so I chose to download XAMPP using PHP version 5.6.30. Running PHP 5 or 7 really won’t matter to installing CakePHP; either version will work.&lt;/p&gt;
+
+&lt;p&gt;Working Directory
+XAMPP serves website files from the htdocs folder so you will need to ensure that you are in the correct path before installing CakePHP.&lt;/p&gt;
+
+&lt;p&gt;In the terminal window run the following command to navigate to the htdocs folder.
+bash
+$ cd /Applications/XAMPP/xamppfiles/htdocs&lt;/p&gt;
+
+&lt;p&gt;Install CakePHP
+Finally we are now ready to install CakePHP. You can do this by running the following command in your terminal window.
+bash
+$ /Applications/XAMPP/bin/php composer create-project –prefer-dist helloworld/app helloworld&lt;/p&gt;
+
+&lt;p&gt;Very Important: In the above command you need to replace helloworld with the name of the project you are setting up.&lt;/p&gt;
+
+&lt;p&gt;Once the command has run you will now have a new folder in the htdocs folder. You can now fire-up the site in your browser.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Please enable JavaScript to view the comments powered by Disqus.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;* Save the file as `/_layouts/humans.html`
+
+What you have done is create a completely new template that will only output the content and ignore any template files you may have. 
+
+By default, Jekyll will wrap your text in a paragraph (`&amp;lt;p&amp;gt;`) tag so the `strip_html` part in the above tells Jekyll to simply dump the raw text without any HTML tags. 
+
+## Create Humans Markdown file
+Go ahead and create a file in the root of your Jekyll site and save it as `humans.md`. You have to create the Markdown file so that Jekyll can compile the page when it generates the site. If you create a `txt` file you lose the ability to access Jekyll's Liquid variables and we need this.
+
+To comply to [the humans standard][standard] you will need to have at least these two sections in your `humans.md` file:
+ 1. `/* TEAM */`
+ 2. `/* SITE */`
+
+I have more in [my file][my-humans] but add what you feel is necessary for yours. In this example let's assume your `humans.md` file now looks like this:
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;/* TEAM */
+    Boss: Your name
+    Email: be weary of spam
+    Twitter: @username
+    From: The country you live in&lt;/p&gt;
+
+&lt;p&gt;/* SITE &lt;em&gt;/
+    Last update: ???????????
+    Language: English
+    Doctype: HTML5
+    IDE: Sublime Text 3, Github Pages, Jekyll
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+The `Last update` field is where we use Jekyll's Liquid variable `2017-07-09 01:02:04 +0000`. Copy and paste `2017-07-09 01:02:04 +0000` next to the `Last update:` field so that your Markdown includes the tag and ends up looking like this:
+&lt;/code&gt;
+/&lt;/em&gt; SITE */
+    Last update: 2017-07-09 01:02:04 +0000
+    Language: English
+    Doctype: HTML5
+    IDE: Sublime Text 3, Github Pages, Jekyll
+```&lt;/p&gt;
+
+&lt;h2 id=&quot;linking-your-template-and-define-a-permalink&quot;&gt;Linking your template and define a permalink&lt;/h2&gt;
+&lt;p&gt;You now need to ensure that &lt;code class=&quot;highlighter-rouge&quot;&gt;humans.md&lt;/code&gt; is accessing your &lt;code class=&quot;highlighter-rouge&quot;&gt;humans.html&lt;/code&gt; template file you created. Go ahead and open up your &lt;code class=&quot;highlighter-rouge&quot;&gt;/humans.md&lt;/code&gt; file. Add the following code snippet to the top of your file:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
+layout: humans
+permalink: '/humans.txt'
+---
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Your file should end up looking like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;---
+layout: humans
+permalink: '/humans.txt'
+---
+/* TEAM */
+    Boss: Your name
+    Email: be weary of spam
+    Twitter: @username
+    From: The country you live in
+
+/* SITE */
+    Last update: 2017-07-09 01:02:04 +0000
+    Language: English
+    Doctype: HTML5
+    IDE: Sublime Text 3, Github Pages, Jekyll
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Setting the &lt;code class=&quot;highlighter-rouge&quot;&gt;permalink&lt;/code&gt; to &lt;code class=&quot;highlighter-rouge&quot;&gt;/humans.txt&lt;/code&gt; is important because we want to conform to standards and we want to render a plain txt page for search engines and the like.&lt;/p&gt;
+
+&lt;h2 id=&quot;adding-the-meta-tag-to-your-template&quot;&gt;Adding the meta-tag to your template&lt;/h2&gt;
+&lt;p&gt;The final step is to add a valid meta-tag to your &lt;code class=&quot;highlighter-rouge&quot;&gt;&amp;lt;head&amp;gt;&lt;/code&gt; section in your main template file. In my case my main template is &lt;code class=&quot;highlighter-rouge&quot;&gt;/_includes/default.html&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Add the following line to your template:
+```html&lt;/p&gt;
+&lt;link rel=&quot;author&quot; href=&quot;humans.txt&quot; type=&quot;text/plain&quot; /&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+If you aren't sure where to put this meta-tag look for the structure similar to the below example which is in your template.
+```html
+&amp;lt;head&amp;gt;
+    &amp;lt;title&amp;gt;&amp;lt;/title&amp;gt;
+    &amp;lt;meta name=&quot;description&quot; content=&quot;&quot; /&amp;gt;
+    &amp;lt;link rel=&quot;stylesheet&quot; type=&quot;text/css&quot; href=&quot;style.css&quot;&amp;gt;
+    &amp;lt;meta content='text/html; charset=utf-8' http-equiv='Content-Type'&amp;gt;
+&amp;lt;/head&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;give-it-a-whirl&quot;&gt;Give it a whirl&lt;/h2&gt;
+&lt;p&gt;Once you have published your changes you should be able to access your newly created humans file at &lt;code class=&quot;highlighter-rouge&quot;&gt;yourdomain.com/humans.txt&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;support&quot;&gt;Support&lt;/h2&gt;
+&lt;p&gt;If you need any help, found a bug or to report any issues please &lt;a href=&quot;https://github.com/justinhartman/howto/issues/new&quot;&gt;click here&lt;/a&gt; and log a support request.&lt;/p&gt;</content><summary type="html">I wanted to create a humans.txt file but at the same time I did not want to manually update the Last update variable in /* SITE */ section every time I made a change. I wanted to automate the process so that I never have to worry about it again.</summary></entry><entry><title type="html">Installing CakePHP on Mac OS X running XAMPP</title><link href="http://localhost:4000/php/cakephp/installing-cakephp-on-mac-os-x-running-xampp/" rel="alternate" type="text/html" title="Installing CakePHP on Mac OS X running XAMPP" /><published>2017-06-15T23:21:00+00:00</published><updated>2017-06-15T23:21:00+00:00</updated><id>http://localhost:4000/php/cakephp/installing-cakephp-on-mac-os-x-running-xampp</id><content type="html" xml:base="http://localhost:4000/php/cakephp/installing-cakephp-on-mac-os-x-running-xampp/">&lt;p&gt;The following Howto will install &lt;a href=&quot;http://cakephp.com&quot;&gt;CakePHP&lt;/a&gt; and get you up and running using &lt;a href=&quot;http:///xampp.com&quot;&gt;XAMPP&lt;/a&gt; on Mac OS X 10.7.5+.&lt;/p&gt;
+
+&lt;p&gt;This guide is a series of terminal commands that will:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Install the latest version of Composer.&lt;/li&gt;
+  &lt;li&gt;Move the &lt;code class=&quot;highlighter-rouge&quot;&gt;composer phar&lt;/code&gt; file to the XAMPP &lt;code class=&quot;highlighter-rouge&quot;&gt;bin&lt;/code&gt; directory.&lt;/li&gt;
+  &lt;li&gt;Install the latest version of CakePHP.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;!-- MarkdownTOC --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#minimum-requirements&quot;&gt;Minimum Requirements&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#getting-composer&quot;&gt;Getting Composer&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#download-and-build&quot;&gt;Download and Build&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#moving-things-around&quot;&gt;Moving things around&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#setting-up-a-cakephp-project&quot;&gt;Setting up a CakePHP project&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#working-directory&quot;&gt;Working Directory&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#install-cakephp&quot;&gt;Install CakePHP&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /MarkdownTOC --&gt;
+
+&lt;h2 id=&quot;minimum-requirements&quot;&gt;Minimum Requirements&lt;/h2&gt;
+&lt;p&gt;I have successfully tested the installation using the following package versions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mac OS X 10.7.5&lt;/li&gt;
+  &lt;li&gt;XAMPP 5.6.30-0&lt;/li&gt;
+  &lt;li&gt;Composer 1.4.1&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Earlier versions of the above software may indeed work however I have not tested them so YMMV.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-composer&quot;&gt;Getting Composer&lt;/h2&gt;
+&lt;p&gt;Open up a terminal window and run the following shell commands. This will download the composer setup file, verify the installer is valid and create the packaged &lt;code class=&quot;highlighter-rouge&quot;&gt;composer.phar&lt;/code&gt; file.&lt;/p&gt;
+
+&lt;h3 id=&quot;download-and-build&quot;&gt;Download and Build&lt;/h3&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;/Applications/XAMPP/bin/php -r &lt;span class=&quot;s2&quot;&gt;&quot;copy('https://getcomposer.org/installer', 'composer-setup.php');&quot;&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;/Applications/XAMPP/bin/php -r &lt;span class=&quot;s2&quot;&gt;&quot;if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;&quot;&lt;/span&gt;
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;/Applications/XAMPP/bin/php composer-setup.php
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;/Applications/XAMPP/bin/php -r &lt;span class=&quot;s2&quot;&gt;&quot;unlink('composer-setup.php');&quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;moving-things-around&quot;&gt;Moving things around&lt;/h3&gt;
+&lt;p&gt;Once you see the &lt;code class=&quot;highlighter-rouge&quot;&gt;Installer Verified&lt;/code&gt; message output in your terminal window you can then run the following command.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+$ mv composer.phar /Applications/XAMPP/bin/composer
+$ alias composer='/Applications/XAMPP/bin/composer/composer.phar'
+&lt;/code&gt;
+This command moves the &lt;code class=&quot;highlighter-rouge&quot;&gt;composer.phar&lt;/code&gt; file to the XAMPP &lt;code class=&quot;highlighter-rouge&quot;&gt;bin&lt;/code&gt; directory so that you can access it from a centralised location within XAMPP. The &lt;code class=&quot;highlighter-rouge&quot;&gt;alias&lt;/code&gt; command makes composer available globally. It is useful to move it as you may want or need to install other packages via Composer.&lt;/p&gt;
+
+&lt;p&gt;You will now be able to run composer at the following location:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+$ /Applications/XAMPP/bin/composer/composer.phar
+&lt;/code&gt;
+or simply run:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+$ composer
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-up-a-cakephp-project&quot;&gt;Setting up a CakePHP project&lt;/h2&gt;
+&lt;p&gt;By default Composer will install the most current version of CakePHP that works with the PHP version in XAMPP. I did not want to run PHP 7 so I chose to download XAMPP using PHP version 5.6.30. Running PHP 5 or 7 really won’t matter to installing CakePHP; either version will work.&lt;/p&gt;
+
+&lt;h3 id=&quot;working-directory&quot;&gt;Working Directory&lt;/h3&gt;
+&lt;p&gt;XAMPP serves website files from the &lt;code class=&quot;highlighter-rouge&quot;&gt;htdocs&lt;/code&gt; folder so you will need to ensure that you are in the correct path before installing CakePHP.&lt;/p&gt;
+
+&lt;p&gt;In the terminal window run the following command to navigate to the &lt;code class=&quot;highlighter-rouge&quot;&gt;htdocs&lt;/code&gt; folder.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+$ cd /Applications/XAMPP/xamppfiles/htdocs
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;install-cakephp&quot;&gt;Install CakePHP&lt;/h3&gt;
+&lt;p&gt;Finally we are now ready to install CakePHP. You can do this by running the following command in your terminal window.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+$ /Applications/XAMPP/bin/php composer create-project --prefer-dist helloworld/app helloworld
+&lt;/code&gt;
+&lt;strong&gt;Very Important:&lt;/strong&gt; In the above command you need to replace &lt;em&gt;helloworld&lt;/em&gt; with the name of the project you are setting up.&lt;/p&gt;
+
+&lt;p&gt;Once the command has run you will now have a new folder in the &lt;code class=&quot;highlighter-rouge&quot;&gt;htdocs&lt;/code&gt; folder. You can now fire-up the site in your browser.&lt;/p&gt;</content><summary type="html">The following Howto will install CakePHP and get you up and running using XAMPP on Mac OS X 10.7.5+.</summary></entry><entry><title type="html">PureFTPd Installation and Setup</title><link href="http://localhost:4000/debian/lamp/pureftpd-installation-and-setup/" rel="alternate" type="text/html" title="PureFTPd Installation and Setup" /><published>2017-06-14T18:53:00+00:00</published><updated>2017-06-14T18:53:00+00:00</updated><id>http://localhost:4000/debian/lamp/pureftpd-installation-and-setup</id><content type="html" xml:base="http://localhost:4000/debian/lamp/pureftpd-installation-and-setup/">&lt;p&gt;The following HOWTO is aimed at installing and setting up a FTP server, based on Pure-FTPd, which supports multiple Virtual Hosts.&lt;/p&gt;
+
+&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;!-- MarkdownTOC --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#page-migration&quot;&gt;Page Migration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#requirements&quot;&gt;Requirements&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pre-installation&quot;&gt;Pre-Installation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#install-pure-ftpd&quot;&gt;Install Pure-FTPd&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#create-a-new-user&quot;&gt;Create a new user&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#user-information&quot;&gt;User Information&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#resetting-a-password&quot;&gt;Resetting a password&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#starting-the-ftp-server&quot;&gt;Starting the FTP Server&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#configuring-pure-ftpd&quot;&gt;Configuring Pure-FTPd&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#restart-pure-ftpd&quot;&gt;Restart Pure-FTPd:&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#references&quot;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /MarkdownTOC --&gt;
+
+&lt;h2 id=&quot;page-migration&quot;&gt;Page Migration&lt;/h2&gt;
+&lt;p&gt;This page first appeared on the &lt;a href=&quot;/howto-history/&quot;&gt;original Debian Wiki&lt;/a&gt; which was created over a decade ago.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Originally Published: 15 January 2007&lt;/li&gt;
+  &lt;li&gt;Migrated: 14 June 2017&lt;/li&gt;
+  &lt;li&gt;Last Updated: 14 June 2017&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A Debian Etch base installation - &lt;a href=&quot;/debian/installing-a-debian-etch-base-system/&quot;&gt;Installation HOWTO here&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;Root access to your server.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;pre-installation&quot;&gt;Pre-Installation&lt;/h2&gt;
+
+&lt;p&gt;Before proceeding to install, update the necessary packages in Debian with these commands.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+apt-get update
+apt-get upgrade
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;install-pure-ftpd&quot;&gt;Install Pure-FTPd&lt;/h2&gt;
+&lt;p&gt;In a Linux shell run the following:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+apt-get install pure-ftpd-common pure-ftpd
+&lt;/code&gt;
+Now we need to create a new system group for pureftpd:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+groupadd ftpgroup
+&lt;/code&gt;
+Now we add a user for the group and give that user no permission to a home directory or a shell:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+useradd -g ftpgroup -d /dev/null -s /etc ftpuser
+&lt;/code&gt;
+### Create a new user
+Lets create our first FTP user. In this example our user will be &lt;code class=&quot;highlighter-rouge&quot;&gt;justin&lt;/code&gt;:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+pure-pw useradd justin -u ftpuser -g ftpgroup -d /home/pubftp/justin -N 10
+&lt;/code&gt;
+In the above command we gave him a limit of 10 MB disk space with the option &lt;code class=&quot;highlighter-rouge&quot;&gt;-N 10&lt;/code&gt;. Now you have to enter justin’s new password twice.&lt;/p&gt;
+
+&lt;p&gt;By default your users will be saved in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/pure-ftpd/pureftpd.passwd&lt;/code&gt;, but first we have to update the pureftpd Database:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+pure-pw mkdb
+&lt;/code&gt;
+The &lt;em&gt;Database&lt;/em&gt; here is simply a binary file but it is ordered and has an index for quick access.&lt;/p&gt;
+
+&lt;h3 id=&quot;user-information&quot;&gt;User Information&lt;/h3&gt;
+&lt;p&gt;To get some user details enter the following to get a complete list of all pureftpd users:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+pure-pw list
+&lt;/code&gt;
+If you want to show information about a specific user:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+pure-pw show justin
+&lt;/code&gt;
+This will show you detailed information about the user &lt;code class=&quot;highlighter-rouge&quot;&gt;justin&lt;/code&gt;.
+You will notice that the line &lt;code class=&quot;highlighter-rouge&quot;&gt;Directory: /home/pubftp/justin/./&lt;/code&gt; has a trailing &lt;code class=&quot;highlighter-rouge&quot;&gt;./&lt;/code&gt; but you shouldn’t worry as this is simply the chroot for the user, which means he can’t go &lt;em&gt;above&lt;/em&gt; his directory.&lt;/p&gt;
+
+&lt;h3 id=&quot;resetting-a-password&quot;&gt;Resetting a password&lt;/h3&gt;
+&lt;p&gt;If you forget the password for a user, you can reset it as follows:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+pure-pw passwd justin
+&lt;/code&gt;
+After a password reset update your database:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+pure-pw mkdb
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;starting-the-ftp-server&quot;&gt;Starting the FTP Server&lt;/h2&gt;
+&lt;p&gt;To test the server let’s start it:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+/usr/sbin/pure-ftpd -S 127.0.0.1,21 -c 30 -C 1 -l puredb:/etc/pureftpd.pdb -x -E -j -R
+&lt;/code&gt;
+The shell will open up a new &lt;code class=&quot;highlighter-rouge&quot;&gt;pure-ftpd&lt;/code&gt; session and you should be able to connect to your FTP server. Use an FTP client to test whether or not you are able to login with your user details you created.
+Once you are happy close the session off:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+ctrl   z
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;configuring-pure-ftpd&quot;&gt;Configuring Pure-FTPd&lt;/h2&gt;
+&lt;p&gt;Right so by now you have created a user and been able to connect to your FTP server. We now want to setup a few things so that we can run Pure-FTPd as a daemon.&lt;/p&gt;
+
+&lt;p&gt;First you need to set Pure-FTPd as a standalone server:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+vim /etc/default/pure-ftpd-common
+&lt;/code&gt;
+Replace this:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+STANDALONE_OR_INETD=inetd
+&lt;/code&gt;
+With this:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+STANDALONE_OR_INETD=standalone
+&lt;/code&gt;
+Now we want to ensure that the standalone server checks our user-names and passwords against the &lt;code class=&quot;highlighter-rouge&quot;&gt;pureftpd&lt;/code&gt; database file:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+cd /etc/pure-ftpd/conf
+vim PureDB
+&lt;/code&gt;
+Add the following to that file (if it doesn’t exist):
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+/etc/pure-ftpd/pureftpd.pdb
+&lt;/code&gt;
+Now we need to create a symbolic link to the PureDB file:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+cd /etc/pure-ftpd/auth
+ln -s /etc/pure-ftpd/conf/PureDB 50pure
+ls -ls
+&lt;/code&gt;
+You should now see a new file &lt;code class=&quot;highlighter-rouge&quot;&gt;50pure&lt;/code&gt; linking to &lt;code class=&quot;highlighter-rouge&quot;&gt;../conf/PureDB&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;restart-pure-ftpd&quot;&gt;Restart Pure-FTPd:&lt;/h2&gt;
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/etc/init.d/pure-ftpd restart
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Pure-FTPd should now startup in daemon mode and everything should be up and running.&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.debian-administration.org/articles/383&quot;&gt;Howto install pureftpd on a debian machine&lt;/a&gt; - by remofritzsche&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.pureftpd.org/&quot;&gt;Pure-FTPd Website&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content><summary type="html">The following HOWTO is aimed at installing and setting up a FTP server, based on Pure-FTPd, which supports multiple Virtual Hosts.</summary></entry><entry><title type="html">Installing a second hard drive</title><link href="http://localhost:4000/debian/server/installing-a-second-hard-drive/" rel="alternate" type="text/html" title="Installing a second hard drive" /><published>2017-06-14T18:53:00+00:00</published><updated>2017-06-14T18:53:00+00:00</updated><id>http://localhost:4000/debian/server/installing-a-second-hard-drive</id><content type="html" xml:base="http://localhost:4000/debian/server/installing-a-second-hard-drive/">&lt;p&gt;Installing a second hard drive is easy if you know how. I needed to do this on my server and below is the steps I followed.&lt;/p&gt;
+
+&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;!-- MarkdownTOC --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#page-migration&quot;&gt;Page Migration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#assumptions&quot;&gt;Assumptions&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#installation&quot;&gt;Installation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#partitioning-your-new-drive&quot;&gt;Partitioning your new drive&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#format-the-new-disk&quot;&gt;Format the new disk&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#mount-your-new-drive&quot;&gt;Mount your new drive&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#adding-to-fstab&quot;&gt;Adding to fstab&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /MarkdownTOC --&gt;
+
+&lt;h2 id=&quot;page-migration&quot;&gt;Page Migration&lt;/h2&gt;
+&lt;p&gt;This page first appeared on the &lt;a href=&quot;/howto-history/&quot;&gt;original Debian Wiki&lt;/a&gt; which was created over a decade ago.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Originally Published: 29 January 2007&lt;/li&gt;
+  &lt;li&gt;Migrated: 14 June 2017&lt;/li&gt;
+  &lt;li&gt;Last Updated: 14 June 2017&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;assumptions&quot;&gt;Assumptions&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;I assume that you have installed the hard drive in your PC, and&lt;/li&gt;
+  &lt;li&gt;That you have rebooted your machine&lt;/li&gt;
+  &lt;li&gt;In this example our primary hard drive is located at &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/hda&lt;/code&gt; and our second, new hard drive is located at &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/hdc&lt;/code&gt; (replace according to your system)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;The first step is to check to see that your new hard drive is installed and picked up by Debian. You do this by running the following command in a shell:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+fdisk -l
+&lt;/code&gt;
+This will give you an output that should look something like this:
+```bash
+Disk /dev/hda: 80.0 GB, 80026361856 bytes
+255 heads, 63 sectors/track, 9729 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes&lt;/p&gt;
+
+&lt;p&gt;Device Boot      Start         End      Blocks   Id  System
+/dev/hda1   *           1        9354    75135973   83  Linux
+/dev/hda2            9355        9729     3012187    5  Extended
+/dev/hda5            9355        9729     3012156   82  Linux swap / Solaris&lt;/p&gt;
+
+&lt;p&gt;Disk /dev/hdc: 500.1 GB, 500107862016 bytes
+255 heads, 63 sectors/track, 60801 cylinders
+Units = cylinders of 16065 * 512 = 8225280 bytes
+```
+You can see that the 500GB disk at &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/hdc&lt;/code&gt; is being picked up but there are no partitions yet for this drive.&lt;/p&gt;
+
+&lt;h2 id=&quot;partitioning-your-new-drive&quot;&gt;Partitioning your new drive&lt;/h2&gt;
+&lt;p&gt;Next up we need to partition our drive with the following:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+cfdisk /dev/hdc
+&lt;/code&gt;
+The cfdisk controller will load up and here you can create a new partition on your drive. From the menus at the bottom I selected the following:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+1. New &amp;gt;&amp;gt; Primary &amp;gt;&amp;gt; Size in MB
+2. Once done select Write
+3. Select Quit
+Your new partition has been created at /dev/hdc1
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;format-the-new-disk&quot;&gt;Format the new disk&lt;/h2&gt;
+&lt;p&gt;Now that we have a new partition at &lt;code class=&quot;highlighter-rouge&quot;&gt;/dev/hdc1&lt;/code&gt; we need to format it for usage by the system. From a Linux shell type:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+mkfs.ext3 /dev/hdc1
+&lt;/code&gt;
+This will now format our partition with the ext3 filesystem which should work fine for your Debian system.&lt;/p&gt;
+
+&lt;h2 id=&quot;mount-your-new-drive&quot;&gt;Mount your new drive&lt;/h2&gt;
+&lt;p&gt;Now that we have partitioned the drive and formatted it we can now mount the drive to begin using it. From a shell run:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+mkdir /new-disk
+mount -t ext3 /dev/hdc1 /new-disk
+&lt;/code&gt;
+The above commands create a new directory for the drive to be mounted in and then we mount the drive to this directory. To check that the drive has been mounted run the following:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+ls -lsa /new-disk
+&lt;/code&gt;
+You should see the following:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+root@debian:/# ls -lsa /new-disk
+total 24
+ 4 drwxrwxrwt  3 root root  4096 2007-01-29 01:57 .
+ 4 drwxr-xr-x 22 root root  4096 2007-01-29 01:58 ..
+16 drwx------  2 root root 16384 2007-01-29 01:57 lost found
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;adding-to-fstab&quot;&gt;Adding to fstab&lt;/h2&gt;
+&lt;p&gt;Everything is now up and running however we need to add our new drive to &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/fstab&lt;/code&gt; so that it will be mounted automatically when we reboot the machine.&lt;/p&gt;
+
+&lt;p&gt;First let’s edit fstab:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+vim /etc/fstab
+&lt;/code&gt;
+At the end of the file add the following line:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+/dev/hdc1       /new-disk            ext3    defaults,errors=remount-ro 0       1 
+&lt;/code&gt;
+Save the file and you’re done.&lt;/p&gt;</content><summary type="html">Installing a second hard drive is easy if you know how. I needed to do this on my server and below is the steps I followed.</summary></entry><entry><title type="html">Setting the time using Terminal</title><link href="http://localhost:4000/debian/server/setting-the-time-using-terminal/" rel="alternate" type="text/html" title="Setting the time using Terminal" /><published>2017-06-14T18:25:00+00:00</published><updated>2017-06-14T18:25:00+00:00</updated><id>http://localhost:4000/debian/server/setting-the-time-using-terminal</id><content type="html" xml:base="http://localhost:4000/debian/server/setting-the-time-using-terminal/">&lt;p&gt;This is really basic stuff but if you aren’t running a GUI then it isn’t as easy as opening up a Time &amp;amp; Date Settings control panel so this is the way to do it.&lt;/p&gt;
+
+&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;!-- MarkdownTOC --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#page-migration&quot;&gt;Page Migration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#setting-the-timezone&quot;&gt;Setting the timezone&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#synchronise-your-clock-with-a-ntp-server&quot;&gt;Synchronise your clock with a NTP server&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /MarkdownTOC --&gt;
+
+&lt;h2 id=&quot;page-migration&quot;&gt;Page Migration&lt;/h2&gt;
+&lt;p&gt;This page first appeared on the &lt;a href=&quot;/howto-history/&quot;&gt;original Debian Wiki&lt;/a&gt; which was created over a decade ago.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Originally Published: 6 March 2007&lt;/li&gt;
+  &lt;li&gt;Migrated: 14 June 2017&lt;/li&gt;
+  &lt;li&gt;Last Updated: 14 June 2017&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;setting-the-timezone&quot;&gt;Setting the timezone&lt;/h2&gt;
+&lt;p&gt;You first want to check what the current date and time is on your machine. Do this by running the following in a Linux shell:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+date
+&lt;/code&gt;
+This should return something like this:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+Tue Mar  6 20:47:59 SAST 2007
+&lt;/code&gt;
+You can also check the timezone you’re currently using by running:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+cat /etc/timezone
+&lt;/code&gt;
+Which would return something like this:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+Africa/Johannesburg
+&lt;/code&gt;
+Now if none of this is correct you want to setup your timezone by running this command:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+tzconfig
+&lt;/code&gt;
+On Debian Lenny (5.0) you need to run this command:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+dpkg-reconfigure tzdata
+&lt;/code&gt;
+Select your continent and type in your city and hit enter. This should return the following:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+Your default time zone is set to 'Africa/Johannesburg'.
+Local time is now:      Tue Mar  6 20:50:15 SAST 2007.
+Universal Time is now:  Tue Mar  6 18:50:15 UTC 2007.
+&lt;/code&gt;
+## Synchronise your clock with a NTP server
+NTP, the Network Time Protocol, is used to keep computer clocks accurate over the Internet. &lt;code class=&quot;highlighter-rouge&quot;&gt;ntpdate&lt;/code&gt; is a simple NTP client which allows a system’s clock to be set to match the time obtained by communicating with one or more servers.&lt;/p&gt;
+
+&lt;p&gt;Install the ntp client
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+apt-get update
+apt-get install ntpdate
+&lt;/code&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;ntpdate&lt;/code&gt; will automatically run when booting your system.&lt;/p&gt;</content><summary type="html">This is really basic stuff but if you aren’t running a GUI then it isn’t as easy as opening up a Time &amp;amp; Date Settings control panel so this is the way to do it.</summary></entry><entry><title type="html">Automated backup to Amazon S3 with Duplicity on Debian Etch</title><link href="http://localhost:4000/debian/server/automated-backup-to-amazon-s3-with-duplicity-on-debian-etch/" rel="alternate" type="text/html" title="Automated backup to Amazon S3 with Duplicity on Debian Etch" /><published>2017-06-14T18:05:00+00:00</published><updated>2017-06-14T18:05:00+00:00</updated><id>http://localhost:4000/debian/server/automated-backup-to-amazon-s3-with-duplicity-on-debian-etch</id><content type="html" xml:base="http://localhost:4000/debian/server/automated-backup-to-amazon-s3-with-duplicity-on-debian-etch/">&lt;p&gt;If you’ve tried to use Debian Etch’s version of Duplicity you’ll know there is no way to use Amazon S3 servers for remote backup as Duplicity on Etch is simply not current enough. This tutorial will show you how to install the most current Duplicity and set it up to backup your Debian Etch server.&lt;/p&gt;
+
+&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;!-- MarkdownTOC --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#page-migration&quot;&gt;Page Migration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#access-requirements&quot;&gt;Access Requirements&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#software-requirements&quot;&gt;Software Requirements&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#installation&quot;&gt;Installation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#generate-a-new-gnupg-key&quot;&gt;Generate a new GnuPG key&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-a-shell-script&quot;&gt;Create a Shell Script&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#testing-if-it-works&quot;&gt;Testing if it works&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-a-cronjob&quot;&gt;Create a cronjob&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#troubleshooting&quot;&gt;Troubleshooting&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#python-error&quot;&gt;Python Error&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#amazon-s3-bucket-names&quot;&gt;Amazon S3 Bucket Names&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /MarkdownTOC --&gt;
+
+&lt;h2 id=&quot;page-migration&quot;&gt;Page Migration&lt;/h2&gt;
+&lt;p&gt;This page first appeared on the &lt;a href=&quot;/howto-history/&quot;&gt;original Debian Wiki&lt;/a&gt; which was created over a decade ago.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Originally Published: 5 March 2007&lt;/li&gt;
+  &lt;li&gt;Migrated: 14 June 2017&lt;/li&gt;
+  &lt;li&gt;Last Updated: 14 June 2017&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;access-requirements&quot;&gt;Access Requirements&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Amazon S3 Access Key ID&lt;/li&gt;
+  &lt;li&gt;Amazon S3 Secret Access Key&lt;/li&gt;
+  &lt;li&gt;GPG Key&lt;/li&gt;
+  &lt;li&gt;GPG Passphrase&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;software-requirements&quot;&gt;Software Requirements&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://duplicity.nongnu.org/&quot;&gt;Duplicity&lt;/a&gt; v0.5.02 or later&lt;/li&gt;
+  &lt;li&gt;Python v2.3 or later&lt;/li&gt;
+  &lt;li&gt;librsync v0.9.6 or later&lt;/li&gt;
+  &lt;li&gt;GnuPG for encryption&lt;/li&gt;
+  &lt;li&gt;GnuPGInterface 0.3.2 or later&lt;/li&gt;
+  &lt;li&gt;NcFTP version 3.1.9 or later&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://code.google.com/p/boto/&quot;&gt;Boto&lt;/a&gt; 0.9d or later&lt;/li&gt;
+  &lt;li&gt;pexpect 2.1 or later&lt;/li&gt;
+  &lt;li&gt;Python development files&lt;/li&gt;
+  &lt;li&gt;librsync development files&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Update your packages.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+apt-get update
+apt-get upgrade
+&lt;/code&gt;
+Install the Debian Etch packages that meet the minimum requirements.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+apt-get install build-essential
+apt-get install librsync1 librsync-dev python-gnupginterface ncftp python-pexpect python-dev
+&lt;/code&gt;
+Download the packages that are outdated in Debian Etch.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+wget http://savannah.nongnu.org/download/duplicity/duplicity-0.5.02.tar.gz
+wget http://boto.googlecode.com/files/boto-1.4c.tar.gz
+&lt;/code&gt;
+Extract the files.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+tar -zxvf duplicity-0.5.02.tar.gz
+tar -zxvf boto-1.4c.tar.gz
+&lt;/code&gt;
+Install Boto
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+cd boto-1.4c
+python setup.py install
+&lt;/code&gt;
+Install Duplicity
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+cd duplicity-0.5.02
+python setup.py install
+&lt;/code&gt;
+## Generate a new GnuPG key
+Generate a new gpg key for duplicity.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash    
+gpg --gen-key
+&lt;/code&gt;
+You will see the following output.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg (GnuPG) 1.4.6; Copyright (C) 2006 Free Software Foundation, Inc.
+This program comes with ABSOLUTELY NO WARRANTY.
+This is free software, and you are welcome to redistribute it
+under certain conditions. See the file COPYING for details.
+
+Please select what kind of key you want:
+(1) DSA and Elgamal (default)
+(2) DSA (sign only)
+(5) RSA (sign only)
+Your selection?
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Select DSA and Elgamal.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;DSA keypair will have 1024 bits.
+ELG-E keys may be between 1024 and 4096 bits long.
+What keysize do you want? (2048)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The default of 2048 is more than enough and you could change this if you like.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Requested keysize is 2048 bits
+Please specify how long the key should be valid.
+         0 = key does not expire
+      &amp;lt;n&amp;gt;  = key expires in n days
+      &amp;lt;n&amp;gt;w = key expires in n weeks
+      &amp;lt;n&amp;gt;m = key expires in n months
+      &amp;lt;n&amp;gt;y = key expires in n years
+Key is valid for? (0)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You must leave the key to not expire so the default is correct here once again.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Key does not expire at all
+Is this correct? (y/N)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Yes, this is correct :)&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You need a user ID to identify your key; the software constructs the user ID
+from the Real Name, Comment and Email Address in this form:
+
+Real name: Duplicity Backup
+Email address: duplicity@example.com
+Comment: GPG Key for Duplicity
+You selected this USER-ID:
+    &quot;Duplicity Backup (Key for Duplicity) &amp;lt;duplicity@example.com&amp;gt;&quot;
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit?
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;You can enter anything you like in the Real Name, Email and Comment fields and once done select O for Okay and hit enter.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;You need a Passphrase to protect your secret key.
+
+Enter Passphrase:
+Repeat Passphrase:
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Enter a password here and make it as complex as possible. Please remember your password you type here because we will need it later.&lt;/p&gt;
+
+&lt;p&gt;Your key will now begin its creation process and this can take a very long time (up to 10-15 minutes). Just be patient, it will generate a key and submit the results as shown below.&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gpg: key FB0B7A37 marked as ultimately trusted
+public and secret key created and signed.
+
+gpg: checking the trustdb
+gpg: 3 marginal(s) needed, 1 complete(s) needed, PGP trust model
+gpg: depth: 0  valid:   2  signed:   0  trust: 0-, 0q, 0n, 0m, 0f, 2u
+pub   1024D/FB0B7A37 2008-09-22
+      Key fingerprint = B5A2 14BD 368B 0E7F 44F3  7C81 2460 B782 FC0B 6A25
+uid                  Duplicity Backup &amp;lt;duplicity@example.com&amp;gt;
+sub   2048g/FB0B7A37 2008-09-22
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;The results above are displayed once your key has been generate. From this you will need to remember your 8 digit key. In this example our key is &lt;code class=&quot;highlighter-rouge&quot;&gt;FB0B7A37&lt;/code&gt;. Keep this in a safe place.&lt;/p&gt;
+
+&lt;h2 id=&quot;create-a-shell-script&quot;&gt;Create a Shell Script&lt;/h2&gt;
+&lt;p&gt;Because we’ll be automating the backup process via cronjob we need to create a shell script that can do all the hard work for us. Below is a basic example shell script that you can modify.
+```bash
+#!/bin/bash
+# Export some ENV variables so you don’t have to type anything
+export AWS_ACCESS_KEY_ID=&lt;your-amazon-s3-access-key-id&gt;
+export AWS_SECRET_ACCESS_KEY=&lt;your-amazon-s3-secret-access-key&gt;
+export PASSPHRASE=&quot;&lt;your-gpg-passphrase&gt;&quot;&lt;/your-gpg-passphrase&gt;&lt;/your-amazon-s3-secret-access-key&gt;&lt;/your-amazon-s3-access-key-id&gt;&lt;/p&gt;
+
+&lt;p&gt;GPG_KEY=&lt;your-8-digit-gpg-key&gt;&lt;/your-8-digit-gpg-key&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;the-source-of-your-backup&quot;&gt;The source of your backup&lt;/h1&gt;
+&lt;p&gt;SOURCE=/&lt;/p&gt;
+
+&lt;h1 id=&quot;select-a-unique-name-for-your-bucket-below&quot;&gt;Select a unique name for your bucket below.&lt;/h1&gt;
+&lt;p&gt;# The bucket doesn’t need to exist on Amazon
+# however you should make sure it’s unique to
+# avoid any conflict with existing buckets from
+# other Amazon S3 users.
+DEST=s3+http://&lt;your-amazon-s3-bucket-name&gt;&lt;/your-amazon-s3-bucket-name&gt;&lt;/p&gt;
+
+&lt;p&gt;duplicity \
+    –encrypt-key=${GPG_KEY} \
+    –sign-key=${GPG_KEY} \
+    –include=/boot \
+    –include=/etc \
+    –include=/home \
+    –include=/root \
+    –include=/var/lib/mysql \
+    –exclude=/** \
+    ${SOURCE} ${DEST}&lt;/p&gt;
+
+&lt;h1 id=&quot;reset-the-env-variables-dont-need-them-sitting-around&quot;&gt;Reset the ENV variables. Don’t need them sitting around&lt;/h1&gt;
+&lt;p&gt;export AWS_ACCESS_KEY_ID=
+export AWS_SECRET_ACCESS_KEY=
+export PASSPHRASE=
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+Save the file and make it executable.
+&lt;/code&gt;bash
+chmod 700 your-filename.sh
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+## Testing if it works
+Prior to creating a cronjob you should test that everything is working perfectly. You can run the following command to see if your script backs up to Amazon S3.
+&lt;/code&gt;bash
+/bin/bash /path/to/script/your-filename.sh
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+You should see the following output if your backup was successful.
+&lt;/code&gt;bash
+No signatures found, switching to full backup.&lt;/p&gt;
+
+&lt;p&gt;————–[ Backup Statistics ]————–
+StartTime 1222126413.99 (Tue Sep 23 01:33:33 2008)
+EndTime 1222126736.68 (Tue Sep 23 01:38:56 2008)
+ElapsedTime 322.69 (5 minutes 22.69 seconds)
+SourceFiles 54198
+SourceFileSize 311617938 (297 MB)
+NewFiles 54198
+NewFileSize 311617938 (297 MB)
+DeletedFiles 0
+ChangedFiles 0
+ChangedFileSize 0 (0 bytes)
+ChangedDeltaSize 0 (0 bytes)
+DeltaEntries 54198
+RawDeltaSize 136543331 (130 MB)
+TotalDestinationSizeChange 112326763 (107 MB)
+Errors 0
+————————————————-
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+## Create a cronjob
+Assuming you had no errors when you ran the test you can now set up the cronjob to automate the process.
+&lt;/code&gt;bash
+crontab -e
+0     0       *       *       *       /bin/bash /path/to/script/your-filename.sh
+```
+This will run the backup every day at midnight.&lt;/p&gt;
+
+&lt;h2 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;/h2&gt;
+
+&lt;h3 id=&quot;python-error&quot;&gt;Python Error&lt;/h3&gt;
+&lt;p&gt;If you get Python errors when trying to run your backup script then I recommend that you first create a unique bucket on Amazon S3 and make sure that you upload at least one file to your new bucket. I’ve noticed a strange problem with Amazon S3 that prevents the script from running if your bucket doesn’t already have a file in it.&lt;/p&gt;
+
+&lt;h3 id=&quot;amazon-s3-bucket-names&quot;&gt;Amazon S3 Bucket Names&lt;/h3&gt;
+&lt;p&gt;Another common issue is the naming of your bucket on Amazon S3. Remember that bucket names have to be unique on the entire Amazon S3 server so if another user is using the same bucket name as you’re trying to create then your backup will fail. Try using a name like &lt;code class=&quot;highlighter-rouge&quot;&gt;amazon_bucket_1234&lt;/code&gt; when naming your bucket.&lt;/p&gt;</content><summary type="html">If you’ve tried to use Debian Etch’s version of Duplicity you’ll know there is no way to use Amazon S3 servers for remote backup as Duplicity on Etch is simply not current enough. This tutorial will show you how to install the most current Duplicity and set it up to backup your Debian Etch server.</summary></entry><entry><title type="html">DNS Installation and Setup using BIND9</title><link href="http://localhost:4000/debian/mail-server/dns-installationand-setup-using-bind9/" rel="alternate" type="text/html" title="DNS Installation and Setup using BIND9" /><published>2017-06-14T16:45:00+00:00</published><updated>2017-06-14T16:45:00+00:00</updated><id>http://localhost:4000/debian/mail-server/dns-installation-and-setup-using-bind9</id><content type="html" xml:base="http://localhost:4000/debian/mail-server/dns-installationand-setup-using-bind9/">&lt;p&gt;This HOWTO will assist you in getting a Domain Name Server (DNS) up and running using BIND9 on Debian Etch.&lt;/p&gt;
+
+&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;!-- MarkdownTOC --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#page-migration&quot;&gt;Page Migration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#introduction&quot;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#requirements&quot;&gt;Requirements&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#pre-installation&quot;&gt;Pre-Installation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#installing-lsb-base-and-bind9&quot;&gt;Installing lsb-base and BIND9&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#configure-the-master-dns-server&quot;&gt;Configure the Master DNS Server&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#setting-up-the-examplecom-domain&quot;&gt;Setting up the example.com domain&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#creating-the-zone-files&quot;&gt;Creating the zone files&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#making-sure-all-is-ok&quot;&gt;Making sure all is OK&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#adding-zone-files-to-bind9&quot;&gt;Adding zone files to BIND9&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#testing&quot;&gt;Testing&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#troubleshooting&quot;&gt;Troubleshooting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#references&quot;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /MarkdownTOC --&gt;
+
+&lt;h2 id=&quot;page-migration&quot;&gt;Page Migration&lt;/h2&gt;
+&lt;p&gt;This page first appeared on the &lt;a href=&quot;/howto-history/&quot;&gt;original Debian Wiki&lt;/a&gt; which was created over a decade ago.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Originally Published: 15 January 2007&lt;/li&gt;
+  &lt;li&gt;Migrated: 14 June 2017&lt;/li&gt;
+  &lt;li&gt;Last Updated: 14 June 2017&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;This HOWTO will assist you in getting a Domain Name Server (DNS) up and running using BIND9 on Debian Etch. When setting up a DNS server it is common practise to use two separate DNS servers for a domain as you are required to have at least two DNS servers running for DNS to work correctly. If one breaks, the other can continue to serve your domain.&lt;/p&gt;
+
+&lt;p&gt;However, when I setup my DNS system I did not have the resources on hand to use two different servers for DNS so the setup below will configure one server to run both nameservers. It’s not an ideal solution and is definitely not a best-practise solution but one can only work with what you have.&lt;/p&gt;
+
+&lt;p&gt;In this HOWTO I will use the fictional domain &lt;code class=&quot;highlighter-rouge&quot;&gt;example.com&lt;/code&gt;. The nameservers will use &lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.254.1&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.254.2&lt;/code&gt; as their IP addresses. Both the domain and namerserver IPs need to be changed to reflect your server.&lt;/p&gt;
+
+&lt;h2 id=&quot;requirements&quot;&gt;Requirements&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;A Debian Etch base installation - &lt;a href=&quot;/debian/installing-a-debian-etch-base-system/&quot;&gt;Installation HOWTO here&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;At least two static IP addresses that you can use to setup the nameserver information.&lt;/li&gt;
+  &lt;li&gt;Root access to your server.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;pre-installation&quot;&gt;Pre-Installation&lt;/h2&gt;
+&lt;p&gt;Before proceeding to install, update the necessary packages in Debian with this command.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+apt-get update
+apt-get upgrade
+&lt;/code&gt;
+## Installing lsb-base and BIND9
+To continue we need some Debian building tools since we have to download source packages:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+apt-get install devscripts
+&lt;/code&gt;
+BIND9 depends on lsb-base from testing. Lets grab it: (Syntax explanation: the &lt;code class=&quot;highlighter-rouge&quot;&gt;-y&lt;/code&gt; tells apt to say yes to all questions, &lt;code class=&quot;highlighter-rouge&quot;&gt;build-dep&lt;/code&gt; installs all packages required for &lt;code class=&quot;highlighter-rouge&quot;&gt;-testing_packageX-&lt;/code&gt; from the Etch repository and with &lt;code class=&quot;highlighter-rouge&quot;&gt;-b&lt;/code&gt; the sour
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+mkdir /usr/local/lsb-base/
+cd /usr/local/lsb-base/
+apt-get -y build-dep lsb-base
+apt-get source lsb-base -b
+dpkg-i lsb-base*.deb
+&lt;/code&gt;
+Next is BIND9:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+mkdir /usr/local/bind9
+cd /usr/local/bind9
+apt-get -y build-dep bind9
+apt-get source bind9 -b
+dpkg -i *.deb
+&lt;/code&gt;
+## Configure the Master DNS Server
+First we need to stop BIND9:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+/etc/init.d/bind9 stop
+&lt;/code&gt;
+In order to chroot bind we need to set an option in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/default/bind9&lt;/code&gt;.
+Locate this in &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/default/bind9&lt;/code&gt;:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+OPTIONS=&quot;-u bind&quot;
+&lt;/code&gt;
+Replace it with this:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+OPTIONS=&quot;-u bind -t /var/lib/named&quot;
+&lt;/code&gt;
+It will now run as user ‘bind’ chrooted in &lt;code class=&quot;highlighter-rouge&quot;&gt;/var/lib/named&lt;/code&gt;.
+These steps are required for the chroot jail:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+mkdir -p /var/lib/named/etc
+mkdir /var/lib/named/dev
+mkdir -p /var/lib/named/var/cache/bind
+mkdir -p /var/lib/named/var/run/bind/run
+mv /etc/bind /var/lib/named/etc
+ln -s /var/lib/named/etc/bind /etc/bind
+mknod /var/lib/named/dev/null c 1 3
+mknod /var/lib/named/dev/random c 1 8
+chmod 666 /var/lib/named/dev/*
+chown -R bind:bind /var/lib/named/var/*
+chown -R bind:bind /var/lib/named/etc/bind
+&lt;/code&gt;
+Bind now has its own dir with space for .pid files and config files. In order to keep things clear we made a symlink back to /etc/.
+Now edit &lt;code class=&quot;highlighter-rouge&quot;&gt;/etc/init.d/sysklogd&lt;/code&gt; to allow logging of bind activity. Replace this:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+SYSLOGD=&quot;&quot;
+&lt;/code&gt;
+With this:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+SYSLOGD=&quot;-a /var/lib/named/dev/log&quot;
+&lt;/code&gt;
+Now restart &lt;code class=&quot;highlighter-rouge&quot;&gt;sysklogd&lt;/code&gt; and BIND9:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+/etc/init.d/sysklogd restart
+/etc/init.d/bind9 start
+&lt;/code&gt;
+And test:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+ping www.google.com
+&lt;/code&gt;
+If you get a reply, then your DNS master server is working and ready to use. We will now complete and use the example.com domain with our new master server.&lt;/p&gt;
+
+&lt;h2 id=&quot;setting-up-the-examplecom-domain&quot;&gt;Setting up the example.com domain&lt;/h2&gt;
+&lt;p&gt;The new master DNS server is currently just forwarding requests to the server of your ISP. So, we will now install and configure our own domain and let our new server handle all request regarding that domain.&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;example.com&lt;/code&gt; has been chosen for illustrative purposes as per the &lt;a href=&quot;http://tools.ietf.org/html/rfc2606&quot;&gt;RFC 2606&lt;/a&gt; - see this &lt;a href=&quot;http://en.wikipedia.org/wiki/Example.com&quot;&gt;Wikipedia Example.com article&lt;/a&gt; for more information.&lt;/p&gt;
+
+&lt;h3 id=&quot;creating-the-zone-files&quot;&gt;Creating the zone files&lt;/h3&gt;
+&lt;p&gt;Lets start with creating the directory where we will store the zone file. This file contains all info about the domain.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+mkdir /etc/bind/zones/master/
+&lt;/code&gt;
+Next we will create the zones file:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+vim /etc/bind/zones/master/example.com.db
+&lt;/code&gt;
+Add the following (obviously replacing &lt;code class=&quot;highlighter-rouge&quot;&gt;example.com&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.254.1&lt;/code&gt; with your own details):&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;;
+; BIND data file for example.com
+;
+$TTL    604800
+@       IN      SOA     ns1.example.com. info.example.com. (
+                            2007011501         ; Serial
+                                  7200         ; Refresh
+                                   120         ; Retry
+                               2419200         ; Expire
+                                604800)        ; Default TTL
+;
+@       IN      NS      ns1.example.com.
+@       IN      NS      ns2.example.com.
+example.com.    IN      MX      10      mail.example.com.
+example.com.    IN      A       192.168.254.1
+ns1                     IN      A       192.168.254.1
+ns2                     IN      A       192.168.254.2
+www                     IN      CNAME   example.com.
+mail                    IN      A       192.168.254.1
+ftp                     IN      CNAME   example.com.
+example.com.            IN      TXT     &quot;v=spf1 ip4:192.168.254.1 a mx ~all&quot;
+mail                    IN      TXT     &quot;v=spf1 a -all&quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Here we have created a DNS zone file with both nameservers as well as records for the mail and ftp server for the domain &lt;code class=&quot;highlighter-rouge&quot;&gt;example.com&lt;/code&gt;. Trying to go into more detail about what each item reflects above is beyond the scope of this HOWTO and you should do your own research into what each item means.&lt;/p&gt;
+
+&lt;p&gt;In South Africa registering domain names with the .co.za extension requires that Reverse DNS (RDNS) is setup correctly. Other TLD’s don’t necessarily require RDNS but either way it’s good practise to setup RDNS for your DNS server so we’ll do so now.&lt;/p&gt;
+
+&lt;p&gt;Create a new file called &lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.254.rev&lt;/code&gt; which follows the convention of the first three IP ranges in your IP address.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+vim /etc/bind/zones/master/192.168.254.rev
+&lt;/code&gt;
+Add the following:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+$TTL 1d ;
+$ORIGIN 254.168.192.IN-ADDR.ARPA.
+@       IN      SOA     ns1.example.com.   info.example.com. (
+                                       2007011501
+                                       7200
+                                       120
+                                       2419200
+                                       604800
+)
+        IN      NS      ns1.example.com.
+        IN      NS      ns2.example.com.
+1       IN      PTR     ns1.example.com.
+2       IN      PTR     ns2.example.com.
+&lt;/code&gt;
+The reverse lookup files are almost identical to the domain zone files with only minor changes. The first section of this file is exactly the same as the first section of the domain zone file. The bottom section is where it is different. This time we are listing the last part of the IP address first and then the hostname last.&lt;/p&gt;
+
+&lt;p&gt;There are two things you must notice here. You have to use the fully qualified domain name here and you must put a &lt;code class=&quot;highlighter-rouge&quot;&gt;.&lt;/code&gt; at the end of it. These 2 things are important to the file and weird things will happen if you don’t do it this way.&lt;/p&gt;
+
+&lt;p&gt;You must also change the &lt;code class=&quot;highlighter-rouge&quot;&gt;$ORIGIN&lt;/code&gt; section at the top of the RDNS file to reflect the reverse IP address of your server. In this example our IP address ranges are &lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.254.1/2&lt;/code&gt; and the reverse of this would be &lt;code class=&quot;highlighter-rouge&quot;&gt;254.168.192.IN-ADDR.ARPA&lt;/code&gt;. In the PTR records at the bottom we assign the final IP range to reflect our two nameservers - i.e. 1 &amp;amp; 2.&lt;/p&gt;
+
+&lt;h3 id=&quot;making-sure-all-is-ok&quot;&gt;Making sure all is OK&lt;/h3&gt;
+&lt;p&gt;Now that we’ve created both zone and reverse files we need to check that our main zone file is good to go. BIND9 breaks very easily so it’s best to run this check before committing your changes.
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+cd /etc/bind/zones/master/
+named-checkzone example.com example.com.db
+&lt;/code&gt;
+You should get an OK status when doing this. If not you need to double-check your zone file and make changes until you get an OK status.&lt;/p&gt;
+
+&lt;h3 id=&quot;adding-zone-files-to-bind9&quot;&gt;Adding zone files to BIND9&lt;/h3&gt;
+&lt;p&gt;We now need to add the zone file data to the &lt;code class=&quot;highlighter-rouge&quot;&gt;named.conf.local&lt;/code&gt; file:
+```bash
+vim /etc/bind/named.conf.local
+And add the following to the file:
+zone “example.com” {
+       type master;
+       file “/etc/bind/zones/master/example.com.db”;
+};&lt;/p&gt;
+
+&lt;p&gt;zone “254.168.192.IN-ADDR.ARPA” {
+       type master;
+       file “/etc/bind/zones/master/192.168.254.rev”;
+};
+&lt;code class=&quot;highlighter-rouge&quot;&gt;
+### Testing
+We can now restart bind and check if it works:
+&lt;/code&gt;bash
+/etc/init.d/bind9 restart
+ping ns1.example.com
+```
+This should bring bring up a ping result resolving to &lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.254.1&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Try another test:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+nslookup
+ns1.example.com
+&lt;/code&gt;
+Should give you &lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.254.1&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally run this one:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+dig @localhost example.com
+&lt;/code&gt;
+If all is OK then you’ll be presented with the zone file information.
+At this stage you now have a working and usable DNS server.&lt;/p&gt;
+
+&lt;h2 id=&quot;troubleshooting&quot;&gt;Troubleshooting&lt;/h2&gt;
+&lt;p&gt;If you’re wondering why updates to the zone file on your master seem to fail, check the serial number inside the zone file. Each time you make a change to the zone file you will need to increase the Serial number in the zone file to ensure that your latest changes are updated.&lt;/p&gt;
+
+&lt;p&gt;The serial is setup and structured as follows:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;2007011501 = (2007)(01)(15)(01)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;First 4 digits of the serial indicate the year - i.e. 2007&lt;/li&gt;
+  &lt;li&gt;Next 2 digits of the serial indicate the month - i.e. 01 (January)&lt;/li&gt;
+  &lt;li&gt;Next 2 digits of the serial indicate the date - i.e. 15&lt;/li&gt;
+  &lt;li&gt;The final 2 digits of the serial indicate the revision number for that day - i.e. 01&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;If you are updating your Serial number but your changes are not being reflected I recommend that you reload your BIND data by executing the following command in a Linux shell:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+rndc reload
+&lt;/code&gt;
+If you are running BIND on two different servers you will need to install &lt;code class=&quot;highlighter-rouge&quot;&gt;ntpdate&lt;/code&gt; on both servers to ensure that zone transfers happen correctly. Both master and slave servers need to have the exact same time setting for zone transfers to take place:
+&lt;code class=&quot;highlighter-rouge&quot;&gt;bash
+apt-get -y install ntpdate
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.debian.org/doc/manuals/network-administrator/ch-bind.html&quot;&gt;Debian GNU/Linux Network Administrator’s Manual - Chapter 8 DNS/BIND&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.howtoforge.com/debian_bind9_master_slave_system&quot;&gt;Debian Sarge Installing A Bind9 Master/Slave DNS System&lt;/a&gt; - by harm&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.howtoforge.com/two_in_one_dns_bind9_views&quot;&gt;Two-in-one DNS server with BIND9&lt;/a&gt; - by pupeno&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.howtoforge.com/debian_dns&quot;&gt;Building A Debian DNS System&lt;/a&gt; - by joe&lt;/li&gt;
+&lt;/ul&gt;</content><summary type="html">This HOWTO will assist you in getting a Domain Name Server (DNS) up and running using BIND9 on Debian Etch.</summary></entry><entry><title type="html">Complete List Of Html Meta Tags</title><link href="http://localhost:4000/html/complete-list-of-html-meta-tags/" rel="alternate" type="text/html" title="Complete List Of Html Meta Tags" /><published>2017-06-09T00:00:00+00:00</published><updated>2017-06-09T00:00:00+00:00</updated><id>http://localhost:4000/html/complete-list-of-html-meta-tags</id><content type="html" xml:base="http://localhost:4000/html/complete-list-of-html-meta-tags/">&lt;p&gt;Ever wondered how many HTML meta tags there are? Ever wanted a complete list of all of them? Well, here you go. The most concise list of meta tags are at your disposal below. Enjoy.&lt;/p&gt;
+
+&lt;p&gt;Know of any tags that have been omitted below? Please &lt;a href=&quot;justin@hartman.me&quot;&gt;send me an email&lt;/a&gt; so that I can add them.&lt;/p&gt;
+
+&lt;h2 id=&quot;table-of-contents&quot;&gt;Table of Contents&lt;/h2&gt;
+&lt;!-- MarkdownTOC --&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#basic-html-meta-tags&quot;&gt;Basic HTML Meta Tags&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#opengraph-meta-tags&quot;&gt;OpenGraph Meta Tags&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#create-custom-meta-tags&quot;&gt;Create Custom Meta Tags&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#companyservice-meta-tags&quot;&gt;Company/Service Meta Tags&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href=&quot;#claimid&quot;&gt;ClaimID&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#apple-meta-tags&quot;&gt;Apple Meta Tags&lt;/a&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href=&quot;#safari-9-pinned-tabs-in-el-capitan&quot;&gt;Safari 9 Pinned tabs in El Capitan&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#internet-explorer-meta-tags&quot;&gt;Internet Explorer Meta Tags&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#windows-8-meta-tags&quot;&gt;Windows 8 Meta Tags&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#google-meta-tags&quot;&gt;Google Meta Tags&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#twitter-cards&quot;&gt;Twitter Cards&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#tweetmeme-meta-tags&quot;&gt;TweetMeme Meta Tags&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#blog-catalog-meta-tags&quot;&gt;Blog Catalog Meta Tags&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href=&quot;#rails-meta-tags&quot;&gt;Rails Meta Tags&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#html-link-tags&quot;&gt;HTML Link Tags&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#other-resources&quot;&gt;Other Resources&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#contributors--thanks&quot;&gt;Contributors &amp;amp; Thanks&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;!-- /MarkdownTOC --&gt;
+
+&lt;h2 id=&quot;basic-html-meta-tags&quot;&gt;Basic HTML Meta Tags&lt;/h2&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;charset=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'UTF-8'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'keywords'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'your, tags'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'description'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'150 words'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'subject'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'your websites subject'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'copyright'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'company name'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'language'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ES'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'robots'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'index,follow'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'revised'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Sunday, July 18th, 2010, 5:15 pm'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'abstract'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'topic'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'summary'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Classification'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Business'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'author'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'name, email@hotmail.com'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'designer'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'reply-to'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'email@hotmail.com'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'owner'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'url'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://www.websiteaddrress.com'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'identifier-URL'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://www.websiteaddress.com'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'directory'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'submission'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'pagename'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'jQuery Tools, Tutorials and Resources - OReilly Media'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'category'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'coverage'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Worldwide'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'distribution'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Global'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'rating'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'General'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'revisit-after'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'7 days'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'subtitle'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'This is my subtitle'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'target'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'all'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'HandheldFriendly'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'True'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'MobileOptimized'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'320'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'date'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Sep. 27, 2010'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'search_date'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'2010-09-27'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'DC.title'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Unstoppable Robot Ninja'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ResourceLoaderDynamicStyles'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;''&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'medium'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'blog'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'syndication-source'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://mashable.com/2008/12/24/free-brand-monitoring-tools/'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'original-source'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://mashable.com/2008/12/24/free-brand-monitoring-tools/'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'verify-v1'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'dV1r/ZJJdDEI++fKJ6iDEl6o+TMNtSu0kv18ONeqM0I='&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'y_key'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1e39c508e0d87750'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'pageKey'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'guest-home'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;itemprop=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'name'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'jQTouch'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Expires'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'0'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Pragma'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'no-cache'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Cache-Control'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'no-cache'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'imagetoolbar'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'no'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'x-dns-prefetch-control'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'off'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;opengraph-meta-tags&quot;&gt;OpenGraph Meta Tags&lt;/h2&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:title'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'The Rock'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:type'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'movie'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:url'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://www.imdb.com/title/tt0117500/'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:image'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://ia.media-imdb.com/rock.jpg'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:site_name'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'IMDb'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:description'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'A group of U.S. Marines, under command of...'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'fb:page_id'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'43929265776'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'application-name'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'foursquare'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:email'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'me@example.com'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:phone_number'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'650-123-4567'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:fax_number'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'+1-415-123-4567'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:latitude'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'37.416343'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:longitude'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'-122.153013'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:street-address'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1601 S California Ave'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:locality'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Palo Alto'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:region'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'CA'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:postal-code'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'94304'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:country-name'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'USA'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'fb:admins'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'987654321'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:type'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'game.achievement'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:points'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'POINTS_FOR_ACHIEVEMENT'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:video'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://example.com/awesome.swf'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:video:height'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'640'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:video:width'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'385'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:video:type'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'application/x-shockwave-flash'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:video'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://example.com/html5.mp4'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:video:type'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'video/mp4'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:video'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://example.com/fallback.vid'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:video:type'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'text/html'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:audio'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://example.com/amazing.mp3'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:audio:title'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Amazing Song'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:audio:artist'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Amazing Band'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:audio:album'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Amazing Album'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;property=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'og:audio:type'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'application/mp3'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;create-custom-meta-tags&quot;&gt;Create Custom Meta Tags&lt;/h2&gt;
+
+&lt;p&gt;Use custom meta tags to store data that you need in JavaScript instead of hard-coding data into your JS source code. Here’s some examples:&lt;/p&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'google-analytics'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'1-AHFKALJ'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'disqus'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'abcdefg'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'uservoice'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'asdfasdf'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'mixpanel'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'asdfasdf'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;companyservice-meta-tags&quot;&gt;Company/Service Meta Tags&lt;/h2&gt;
+
+&lt;h4 id=&quot;claimid&quot;&gt;ClaimID&lt;/h4&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'microid'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'mailto+http:sha1:e6058ed7fca4a1921cq91d7f1f3b8736cd3cc1g7'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'readability-verification'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'E7aEHvVQpWc8VHDqKvaB2Z58hek2EAv2HuLuegv7'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'google-site-verification'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'4SMIedO1X4IkYrYuhEC2VuovdQM36Xxb0btUjElqQyg'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'ICBM'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'40.746990, -73.980537'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'generator'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'WordPress 3.3.1'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'norton-safeweb-site-verification'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'tz8iotmk-pkhui406y41y5bfmfxdwmaa4a-yc0hm6r0fga7s6j0j27qmgqkmc7oovihzghbzhbdjk-uiyrz438nxsjdbj3fggwgl8oq2nf4ko8gi7j4z7t78kegbidl4'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;apple-meta-tags&quot;&gt;Apple Meta Tags&lt;/h4&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;apple-mobile-web-app-title&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;My App&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;&amp;lt;!-- New in iOS6 --&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'apple-mobile-web-app-capable'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'yes'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'apple-touch-fullscreen'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'yes'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'apple-mobile-web-app-status-bar-style'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'black'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'format-detection'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'telephone=no'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'viewport'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'width=device-width; content=width = 320; initial-scale=1.0; maximum-scale=1.0; user-scalable=yes; target-densitydpi=160dpi'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/apple-touch-icon.png'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'apple-touch-icon'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'image/png'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'touch-icon-ipad.png'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'apple-touch-icon'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sizes=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'72x72'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'touch-icon-iphone4.png'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'apple-touch-icon'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sizes=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'114x114'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/startup.png'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'apple-touch-startup-image'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://github.com/images/touch-icon-iphone4.png'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sizes=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'114x114'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'apple-touch-icon-precomposed'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://github.com/images/touch-icon-ipad.png'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sizes=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'72x72'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'apple-touch-icon-precomposed'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://github.com/images/apple-touch-icon-57x57.png'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;sizes=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'57x57'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'apple-touch-icon-precomposed'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h5 id=&quot;safari-9-pinned-tabs-in-el-capitan&quot;&gt;Safari 9 Pinned tabs in El Capitan&lt;/h5&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;mask-icon&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;website_icon.svg&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;color=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;red&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;internet-explorer-meta-tags&quot;&gt;Internet Explorer Meta Tags&lt;/h4&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Page-Enter'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'RevealTrans(Duration=2.0,Transition=2)'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Page-Exit'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'RevealTrans(Duration=3.0,Transition=12)'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'mssmarttagspreventparsing'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'true'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;IE=edge,chrome=1&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;X-UA-Compatible&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'msapplication-starturl'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://blog.reybango.com/about/'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'msapplication-window'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'width=800;height=600'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'msapplication-navbutton-color'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'red'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'application-name'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Rey Bango Front-end Developer'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'msapplication-tooltip'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Launch Rey Bango'&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;s&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;Blog&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'msapplication-task'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'name=About;action-uri=/about/;icon-uri=/images/about.ico'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'msapplication-task'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'name=The Big List;action-uri=/the-big-list-of-javascript-css-and-html-development-tools-libraries-projects-and-books/;icon-uri=/images/list_links.ico'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'msapplication-task'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'name=jQuery Posts;action-uri=/category/jquery/;icon-uri=/images/jquery.ico'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'msapplication-task'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'name=Start Developing;action-uri=/category/javascript/;icon-uri=/images/script.ico'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'msvalidate.01'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'6E3AD52DC176461A3C81DD6E98003BC9'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;http-equiv=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'cleartype'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'on'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;windows-8-meta-tags&quot;&gt;Windows 8 Meta Tags&lt;/h4&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;application-name&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; Contoso&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;msapplication-TileColor&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot; #009900&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;msapplication-square70x70logo&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;images/smalltile.png&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;msapplication-square150x150logo&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;images/mediumtile.png&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;msapplication-wide310x150logo&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;images/widetile.png&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;msapplication-square310x310logo&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;images/largetile.png&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;msapplication-notification&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;frequency=30; polling-uri=notifications/contoso1.xml;
+polling-uri2=notifications/contoso2.xml; polling-uri3=notifications/contoso3.xml&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;google-meta-tags&quot;&gt;Google Meta Tags&lt;/h4&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;news_keywords&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;World Cup, Brazil 2014, Spain vs Netherlands, soccer, football&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;twitter-cards&quot;&gt;Twitter Cards&lt;/h4&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:card&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;summary&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:site&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@flickr&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:site.id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@flickr&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:creator&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@flickr&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:creator.id&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;@flickr&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:title&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Small Island Developing States Photo Submission&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:description&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;View the album on Flickr.&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:image&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://farm6.staticflickr.com/5510/14338202952_93595258ff_z.jpg&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:image.alt&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;A text description of the image conveying the essential nature of an image to users who are visually impaired.&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:player&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://urlofplayeriframe.com&quot;&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:player&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.w3schools.com/html/mov_bbb.html&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:player:stream&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;https://www.w3schools.com/html/mov_bbb.mp4&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:player:height&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;320&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:player:width&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;600&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:domain&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;www.w3schools.com&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:app:country&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;US&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:app:name:iphone&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Cannonball&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:app:id:iphone&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;929750075&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:app:url:iphone&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cannonball://poem/5149e249222f9e600a7540ef&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:app:name:ipad&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Cannonball&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:app:id:ipad&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;929750075&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:app:url:ipad&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;cannonball://poem/5149e249222f9e600a7540ef&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:app:name:googleplay&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Cannonball&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:app:id:googleplay&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;io.fabric.samples.cannonball&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;twitter:app:url:googleplay&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;http://cannonball.fabric.io/poem/5149e249222f9e600a7540ef&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;tweetmeme-meta-tags&quot;&gt;TweetMeme Meta Tags&lt;/h4&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'tweetmeme-title'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Retweet Button Explained'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;blog-catalog-meta-tags&quot;&gt;Blog Catalog Meta Tags&lt;/h4&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'blogcatalog'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;rails-meta-tags&quot;&gt;Rails Meta Tags&lt;/h4&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'csrf-param'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'authenticity_token'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;meta&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'csrf-token'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;content=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/bZVwvomkAnwAI1Qd37lFeewvpOIiackk9121fFwWwc='&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;html-link-tags&quot;&gt;HTML Link Tags&lt;/h2&gt;
+
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'alternate'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'application/rss+xml'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'RSS'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://feeds.feedburner.com/martini'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'alternate'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'application/atom+xml'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Atom 0.3'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://example.com/feed.atom'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'shortcut icon'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'image/ico'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/favicon.ico'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'fluid-icon'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'image/png'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/fluid-icon.png'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'me'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'text/html'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://google.com/profiles/thenextweb'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'shortlink'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://blog.unto.net/?p=353'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'archives'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'May 2003'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://blog.unto.net/2003/05/'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'index'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'DeWitt Clinton'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://blog.unto.net/'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'start'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Pattern Recognition 1'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://blog.unto.net/photos/pattern_recognition_1_about/'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'bookmark'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Styleguide'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://paulrobertlloyd.com/about/styleguide/'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'search'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/search.xml'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'application/opensearchdescription+xml'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Viatropos'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'self'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'application/atom+xml'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://www.syfyportal.com/atomFeed.php?page=3'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'first'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://www.syfyportal.com/atomFeed.php'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'next'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://www.syfyportal.com/atomFeed.php?page=4'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'previous'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://www.syfyportal.com/atomFeed.php?page=2'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'last'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://www.syfyportal.com/atomFeed.php?page=147'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'canonical'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://smallbiztrends.com/2010/06/9-things-to-do-before-entering-social-media.html'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'EditURI'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'application/rsd+xml'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'RSD'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://smallbiztrends.com/xmlrpc.php?rsd'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'pingback'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://smallbiztrends.com/xmlrpc.php'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'stylesheet'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;media=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'only screen and (max-device-width: 480px)'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://wordpress.org/style/iphone.css'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'text/css'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'wlwmanifest'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://www.example.com/wp-includes/wlwmanifest.xml'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'application/wlwmanifest+xml'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'help'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'FAQ'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/faq'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'logo'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'image/svg'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://playfoursquare.s3.amazonaws.com/press/logo/foursquare-logo.svg'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'P3Pv1'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'/w3c/p3p.xml'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'publisher'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://plus.google.com/115081025762845243709/'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'image_src'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://du3itj18e4z0b.cloudfront.net/7b29fe/images/icon-facebook.gif'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'image/jpeg'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'author'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'humans.txt'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;type=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'text/plain'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://thenextweb.com/2009/01/08/how-to-snap-up-that-twitter-username-youve-always-wanted/'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'original-source'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'profile'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;title=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'Microformats'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://microformats.org/profile/specs/'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'profile'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'http://gmpg.org/xfn/11'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'chrome-webstore-item'&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;'https://chrome.google.com/webstore/detail/noojglkidnpfjbincgijbaiedldjfbhh'&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h2 id=&quot;other-resources&quot;&gt;Other Resources&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://html5boilerplate.com/docs/head-Tips/&quot;&gt;HTML5 Boilerplate explanations and suggestions of header tags&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.seoconsultants.com/meta-tags/dublin/&quot;&gt;Dublic Core Meta Tags&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://developer.apple.com/safari/library/documentation/appleapplications/reference/safarihtmlref/articles/metatags.html&quot;&gt;Apple Meta Tags&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://opengraphprotocol.org/&quot;&gt;OpenGraph Meta Tags&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://developers.facebook.com/docs/sharing/webmasters&quot;&gt;Facebook Open Graph&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://dev.twitter.com/cards/markup&quot;&gt;Twitter Cards Markup Tag Reference&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://intertwingly.net/wiki/pie/LinkTagMeaning&quot;&gt;Link Tag Meaning&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.html5rocks.com/&quot;&gt;Google Chrome HTML5 Tags&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;contributors--thanks&quot;&gt;Contributors &amp;amp; Thanks&lt;/h2&gt;
+
+&lt;p&gt;This list was originally &lt;a href=&quot;http://code.lancepollard.com/complete-list-of-html-meta-tags/&quot;&gt;published here&lt;/a&gt; and created by &lt;a href=&quot;https://gist.github.com/lancejpollard&quot;&gt;Lance Pollard&lt;/a&gt;. I found additional tags which were created by &lt;a href=&quot;https://gist.github.com/kevinSuttle&quot;&gt;Kevin Suttle&lt;/a&gt; and have merged Lance, Kevin and my additions to one document and will continue to update as needed.&lt;/p&gt;</content><summary type="html">Ever wondered how many HTML meta tags there are? Ever wanted a complete list of all of them? Well, here you go. The most concise list of meta tags are at your disposal below. Enjoy.</summary></entry></feed>

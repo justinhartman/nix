@@ -1,0 +1,53 @@
+---
+title: howto.hartman.me
+timezone: Africa/Johannesburg
+collections:
+  posts:
+    title: Posts
+    output: true
+  uploads:
+    title: Uploads
+    output: true
+name: Debian, Ubuntu and macOS Guides
+description: Formally the Debian Wiki this is a refreshed collection of *nix based
+  howto's that I've created over the years for Linux and macOS specifically Debian,
+  Ubuntu and Mac OS X.
+sass:
+  style: expanded
+avatar: https://avatars2.githubusercontent.com/u/717118?v=3&s=460
+footer-links:
+  dribbble: 
+  email: justin@hartman.me
+  facebook: 
+  flickr: 
+  github: justinhartman/howto
+  instagram: 
+  linkedin: justinhartman
+  pinterest: 
+  rss: atom.xml
+  twitter: justinhartman
+  stackoverflow: justinhartman
+  youtube: 
+  googleplus: 
+disqus: iamjustinhartman
+google_analytics: UA-100937492-1
+url: http://howto.hartman.me
+baseurl: 
+permalink: "/:title/"
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: highlight
+gems:
+- jekyll-sitemap
+- jekyll-feed
+- jekyll-last-modified-at
+exclude:
+- Gemfile
+- Gemfile.lock
+- README.md
+- LICENSE.md
+- CNAME
+- nix.sublime-project
+- nix.sublime-workspace
