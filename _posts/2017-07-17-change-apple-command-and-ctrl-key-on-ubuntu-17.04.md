@@ -26,37 +26,37 @@ This should work on any Macbook/MacBook Pro. The issue is that Xmodmap assigns t
 ## Map the keycode using Xmodmap
 Create a new file in your home directory.
 ```sh
-    touch ~/.Xmodmap
-    nano ~/.Xmodmap
+$ touch ~/.Xmodmap
+$ nano ~/.Xmodmap
 ```
 
 Now add the following to you `Xmodmap` file.
 ```sh
-	clear control
-	clear mod4
+clear control
+clear mod4
 
-	keycode 105 =
-	keycode 206 =
+keycode 105 =
+keycode 206 =
 
-	keycode 133 = Control_L NoSymbol Control_L
-	keycode 134 = Control_R NoSymbol Control_R
-	keycode 37 = Super_L NoSymbol Super_L
+keycode 133 = Control_L NoSymbol Control_L
+keycode 134 = Control_R NoSymbol Control_R
+keycode 37 = Super_L NoSymbol Super_L
 
-	add control = Control_L
-	add control = Control_R
-	add mod4 = Super_L
+add control = Control_L
+add control = Control_R
+add mod4 = Super_L
 ```
 
 To test it run the following command:
 ```sh
-    xmodmap ~/.Xmodmap
+$ xmodmap ~/.Xmodmap
 ```
 
 To make it run every time, add it to Startup Applications, the GUI Interface in Ubuntu. Now this was not easy for me to figure out but I figured out that you need to use absolute paths when adding an item to the Startup Applications.
 
 In my instance this is the full path to my Xmodmap script:
 ```sh
-    /usr/bin/xmodmap /home/justin/.Xmodmap
+/usr/bin/xmodmap /home/justin/.Xmodmap
 ```
 
 Using your full path to `Xmodmap` create your new Startup Application like this:
