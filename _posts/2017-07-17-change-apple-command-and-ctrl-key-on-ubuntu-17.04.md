@@ -66,6 +66,6 @@ Using your full path to `Xmodmap` create your new Startup Application like this:
 ## Credits
 Adapted from [kalaracey](https://askubuntu.com/users/18882/kalaracey)'s solution on this [AskUbuntu](https://askubuntu.com/a/158014) thread.
 
-[image]: images/posts/2017-07-17/xmodmap-startup-application.png
+[image]: /images/posts/2017-07-17/xmodmap-startup-application.png
 
 
